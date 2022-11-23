@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-neutral-800 h-full;
+    }
+}
+
+@layer components {
+
+    .t-test {
+        @apply text-purple-800 font-bold text-xl bg-purple-200 text-center p-8 m-8 border-purple-600 border-dashed border-4 rounded-md;
+    }
+}
