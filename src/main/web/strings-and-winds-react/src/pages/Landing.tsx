@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from "react";
 import {GlassCard} from "../components/GlassCard";
 import {Button} from "../components/Button";
 import {useNavigate} from "react-router-dom";
+import {LoginForm} from "../components/LoginForm";
 
 export const Landing = (
     props: {}
@@ -21,10 +22,7 @@ export const Landing = (
             <GlassCard position={"z-10 absolute inset-x-0 mx-auto mt-24"} padding={"py-12 px-16"} size={"h-[32rem] w-96"} color={"bg-purple-100/25"}>
                 <div className={"text-purple-50 font-normal text-2xl tracking-[0.25em]"}>LOGIN</div>
                 <div className={"h-full flex flex-col items-center justify-between"}>
-                    <form onSubmit={handleLogin}>
-                        <div>Login Form</div>
-                        <Button isSubmit={true} type={"primary"} rounded={"rounded-lg"} label={"Log In"}/>
-                    </form>
+                    <LoginForm handleLogin={handleLogin}/>
                     <div className={"underline underline-offset-4 text-xs text-purple-50 hover:text-purple-300 hover:cursor-pointer"}>Dont have an account yet?</div>
                 </div>
             </GlassCard>
