@@ -10,8 +10,7 @@ export const Navbar = (
     }
 ) => {
 
-    const navVariant : string = props.isLogged ? "h-16 justify-between" : "h-24 justify-center";
-    const logoVariant : number = props.isLogged ? 0 : 1;
+    const navVariant : string = props.isLogged ? "justify-between" : "justify-center";
     const linkTreeVariant : string = props.isLogged ? "text-base space-x-8" : "hidden w-0 h-0";
 
     const checkIsAdmin = () => {
@@ -19,8 +18,8 @@ export const Navbar = (
     }
 
     return (
-        <header className={`sticky top-0 z-50 flex flex-row px-16 items-center bg-black text-slate-100 ${navVariant}`}>
-            <Logo variant={logoVariant}/>
+        <header className={`sticky top-0 z-50 flex flex-row px-16 items-center bg-black text-slate-100 h-16 ${navVariant}`}>
+            <Logo variant={0}/>
             <div id={"navLinkTree"} className={linkTreeVariant}>
                 <Link className={"nav_link"} to={"/home"}>Home</Link>
                 {checkIsAdmin()}

@@ -10,17 +10,10 @@ export const Logo = (
             titleSize : "text-4xl",
             subtitleSize : "text-sm font-light"
         }
-        switch (props.variant) {
-            case 1:
-                variables.titleSize = "text-5xl";
-                break;
-            case 2:
-                variables.parentFlex = "flex-col space-x-2";
-                variables.titleSize = "text-8xl";
-                variables.subtitleSize = "text-2xl font-normal";
-                break;
-            default:
-                return variables;
+        if (props.variant === 1) {
+            variables.parentFlex = "flex-col space-x-2";
+            variables.titleSize = "text-8xl";
+            variables.subtitleSize = "text-2xl font-normal";
         }
 
         return variables;
