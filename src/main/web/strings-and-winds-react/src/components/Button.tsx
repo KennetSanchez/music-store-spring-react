@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 
 export const Button = (
     props: {
@@ -29,7 +29,9 @@ export const Button = (
                 return `${shadow} ${squareSize} bg-red-600 text-red-200 text-base ${transition} hover:bg-red-200 hover:text-red-600`;
         }
     }
-    return (
-        <input type={bType} onClick={props.onClick} className={`${props.rounded} ${types()}`} value={props.label}/>
+    if (props.isSubmit) return (
+        <input name={props.label.toLowerCase()} type={"submit"} className={`${props.rounded} ${types()}`} value={props.label}/>
+    ); else return (
+        <input name={props.label.toLowerCase()} type={"button"} onClick={props.onClick} className={`${props.rounded} ${types()}`} value={props.label}/>
     );
 }

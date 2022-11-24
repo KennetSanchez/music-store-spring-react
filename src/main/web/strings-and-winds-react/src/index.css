@@ -9,7 +9,7 @@
     }
 
     body {
-        @apply bg-neutral-900 h-full;
+        @apply bg-neutral-900 h-screen w-screen fixed;
     }
 }
 
