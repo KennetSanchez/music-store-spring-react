@@ -5,15 +5,19 @@ import {useNavigate} from "react-router-dom";
 import {LoginForm} from "../components/LoginForm";
 
 export const Landing = (
-    props: {}
+    props: {
+        loginState : [any,  React.Dispatch<React.SetStateAction<any>>],
+        adminState : [any,  React.Dispatch<React.SetStateAction<any>>]
+    }
 ) => {
-
     const navigate = useNavigate();
 
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
 
     const handleLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        props.loginState[1](true);
+        props.adminState[1](false);
         navigate("/home");
     }
 

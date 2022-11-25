@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Route, Routes} from "react-router-dom";
+import React, {FormEvent, useState} from 'react';
+import {Route, Routes, useNavigate} from "react-router-dom";
 import {Account} from "./pages/Account";
 import {Cart} from "./pages/Cart";
 import {Users} from "./pages/Users";
@@ -21,7 +21,7 @@ const App = () => {
       <div className={"h-screen"}>
           <Navbar isLogged={isLogged} isAdmin={isAdmin} handleLogout={handleLogout}/>
           <Routes>
-              <Route path={"/"} element={<Landing/>}/>
+              <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]} loginState={[isLogged, setIsLogged]}/>}/>
               <Route path={"/home"} element={<Home/>}/>
               <Route path={"/users"} element={<Users/>}/>
               <Route path={"/cart"} element={<Cart/>}/>
