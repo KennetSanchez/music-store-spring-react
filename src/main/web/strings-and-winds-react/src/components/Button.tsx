@@ -11,6 +11,7 @@ export const Button = (
 ) => {
     const bType : string = props.isSubmit ? "submit" : "button";
 
+    const focus : string = "ring-transparent ring-2 ring-offset-0 focus:outline-none transition delay-350 ease-in-out";
     const transition : string = "transition delay-100 ease-in hover:cursor-pointer";
     const shadow : string = "drop-shadow-md";
     const squareSize : string = "h-14 w-14";
@@ -20,13 +21,13 @@ export const Button = (
         switch (props.type) {
             case "primary":
             default:
-                return `${shadow} ${size} bg-purple-700 text-white text-base ${transition} hover:bg-purple-400 hover:text-purple-800`;
+                return `${shadow} ${size} bg-purple-700 text-white text-base ${transition} hover:bg-purple-400 hover:text-purple-800 ${focus} focus:ring-purple-200`;
             case "square":
-                return `${shadow} ${size} bg-purple-800 text-purple-200 ${transition} hover:bg-purple-400 hover:text-purple-800`;
+                return `${shadow} ${size} bg-purple-800 text-purple-200 ${transition} hover:bg-purple-400 hover:text-purple-800 ${focus} focus:ring-purple-200`;
             case "square-danger":
-                return `${shadow} ${squareSize} bg-purple-800 text-purple-200 ${transition} hover:bg-red-600 hover:text-red-200`
+                return `${shadow} ${squareSize} bg-purple-800 text-purple-200 ${transition} hover:bg-red-600 hover:text-red-200 ${focus} focus:ring-red-200`
             case "danger":
-                return `${shadow} ${squareSize} bg-red-600 text-red-200 text-base ${transition} hover:bg-red-200 hover:text-red-600`;
+                return `${shadow} ${squareSize} bg-red-600 text-red-200 text-base ${transition} hover:bg-red-200 hover:text-red-600 ${focus} focus:ring-red-200`;
         }
     }
     if (props.isSubmit) return (
