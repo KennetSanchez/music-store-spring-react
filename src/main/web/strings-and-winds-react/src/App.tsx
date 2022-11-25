@@ -12,6 +12,8 @@ const App = () => {
 
     let [isLogged, setIsLogged] = useState(false);
     let [isAdmin, setIsAdmin] = useState(false);
+    let [cart, setCart] = useState([]);
+    let [cartItemCount, setCartItemCount] = useState(0);
 
     const handleLogout = (e : React.MouseEvent<HTMLAnchorElement>) => {
         setIsLogged(false);
@@ -24,7 +26,7 @@ const App = () => {
               <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]} loginState={[isLogged, setIsLogged]}/>}/>
               <Route path={"/home"} element={<Home/>}/>
               <Route path={"/users"} element={<Users/>}/>
-              <Route path={"/cart"} element={<Cart/>}/>
+              <Route path={"/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
               <Route path={"/orders"} element={<Orders/>}/>
               <Route path={"/account"} element={<Account/>}/>
           </Routes>

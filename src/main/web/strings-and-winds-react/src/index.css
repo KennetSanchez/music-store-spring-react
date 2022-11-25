@@ -29,6 +29,10 @@ select:-webkit-autofill:focus {
     body {
         @apply bg-neutral-900 h-screen w-screen fixed;
     }
+
+    h3 {
+        @apply text-purple-50 font-normal text-lg tracking-[0.25em];
+    }
 }
 
 @layer components {
