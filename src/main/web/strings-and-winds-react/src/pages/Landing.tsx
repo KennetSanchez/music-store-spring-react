@@ -16,8 +16,11 @@ export const Landing = (
 
     const handleLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        let form = (e.target as HTMLFormElement);
         props.loginState[1](true);
         props.adminState[1](false);
+        console.log(`Key: ${form.lKey.value}`);
+        console.log(`Pass: ${form.lPass.value}`);
         navigate("/home");
     }
 
