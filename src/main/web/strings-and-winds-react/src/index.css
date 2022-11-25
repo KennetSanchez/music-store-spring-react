@@ -27,7 +27,7 @@ select:-webkit-autofill:focus {
     }
 
     body {
-        @apply bg-neutral-900 h-screen w-screen fixed;
+        @apply bg-neutral-900 h-full w-full;
     }
 
     h3 {

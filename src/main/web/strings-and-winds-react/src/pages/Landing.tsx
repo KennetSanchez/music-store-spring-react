@@ -25,7 +25,7 @@ export const Landing = (
     }
 
     return (
-        <div className={"w-full h-full relative"}>
+        <div className={"w-full h-full absolute"}>
             <GlassCard position={"z-10 absolute inset-x-0 mx-auto mt-24"} padding={"py-12 px-16"} size={"h-[32rem] w-96"} color={"bg-purple-100/25"}>
                 <h3 className={"text-2xl"}>LOGIN</h3>
                 <div className={"h-full flex flex-col items-center justify-between"}>
