@@ -26,8 +26,16 @@ select:-webkit-autofill:focus {
         @apply font-rubik;
     }
 
+    *::selection {
+        background-color: theme("colors.purple.300");
+    }
+
     body {
         @apply bg-neutral-900 h-full w-full;
+    }
+
+    p {
+        @apply text-purple-50 font-normal text-base;
     }
 
     h3 {

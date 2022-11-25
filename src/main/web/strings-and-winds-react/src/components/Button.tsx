@@ -27,7 +27,7 @@ export const Button = (
             case "square-danger":
                 return `${shadow} ${squareSize} bg-purple-800 text-purple-200 ${transition} hover:bg-red-600 hover:text-red-200 ${focus} focus:ring-red-200`
             case "danger":
-                return `${shadow} ${squareSize} bg-red-600 text-red-200 text-base ${transition} hover:bg-red-200 hover:text-red-600 ${focus} focus:ring-red-200`;
+                return `${shadow} ${size} bg-red-600 text-red-200 text-base ${transition} hover:bg-red-200 hover:text-red-600 ${focus} focus:ring-red-200`;
         }
     }
     if (props.isSubmit) return (
