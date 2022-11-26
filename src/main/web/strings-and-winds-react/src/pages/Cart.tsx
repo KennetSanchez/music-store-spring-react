@@ -5,6 +5,7 @@ import {Input} from "../components/Input";
 import {CartItem} from "../components/CartItem";
 import {CartItemType} from "../CartItemType";
 import {Button} from "../components/Button";
+import {PaymentOptions} from "../components/PaymentOptions";
 
 export const Cart = (
     props: {
@@ -69,7 +70,7 @@ export const Cart = (
                                     <div className={"flex justify-between items-center"}>
                                         <h3>PAYMENT OPTIONS</h3>
                                     </div>
-                                    <div>OPTIONS</div>
+                                    <PaymentOptions/>
                                 </div>
                                 <div className={"flex justify-between w-full"}>
                                     <Button isSubmit={false} type={"primary"} rounded={"rounded-md"} label={"Place Order"}/>

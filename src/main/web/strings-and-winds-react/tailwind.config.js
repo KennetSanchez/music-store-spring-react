@@ -8,7 +8,11 @@ module.exports = {
       'merriweather': ['Merriweather'],
       'rubik' : ['Rubik']
     },
-    extend: {},
+    extend: {
+      dropShadow: {
+        'purple-glow': '0px 0px 4px #A855F7'
+      }
+    },
   },
   plugins: [],
 }
