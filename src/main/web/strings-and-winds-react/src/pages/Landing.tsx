@@ -1,7 +1,7 @@
 import React, {FormEvent, useState} from "react";
 import {GlassCard} from "../components/GlassCard";
 import {Button} from "../components/Button";
-import {useNavigate} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 import {LoginForm} from "../components/LoginForm";
 
 export const Landing = (
@@ -24,13 +24,17 @@ export const Landing = (
         navigate("/home");
     }
 
+    const handleSignUp = () =>{
+        navigate("/sign-up")
+    }
+
     return (
         <div className={"w-full h-full absolute"}>
             <GlassCard position={"z-10 absolute inset-x-0 mx-auto mt-24"} padding={"py-12 px-16"} size={"h-[32rem] w-96"} color={"bg-purple-100/25"} spacing={"space-y-24"}>
                 <h3 className={"text-2xl"}>LOGIN</h3>
                 <div className={"h-full flex flex-col items-center justify-between"}>
                     <LoginForm handleLogin={handleLogin}/>
-                    <div className={"underline underline-offset-4 text-xs text-purple-50 hover:text-purple-300 hover:cursor-pointer"}>Dont have an account yet?</div>
+                    <div className={"underline underline-offset-4 text-xs text-purple-50 hover:text-purple-300 hover:cursor-pointer"} onClick={handleSignUp}>Dont have an account yet?</div>
                 </div>
             </GlassCard>
 

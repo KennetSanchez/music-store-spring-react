@@ -13,8 +13,8 @@ export const LoginForm = (
     return (
         <form onSubmit={props.handleLogin} className={formFlex}>
             <div className={"space-y-8"}>
-                <Input type={"text"} placeHolder={"Username or Email"} name={"lKey"}/>
-                <Input type={"password"} placeHolder={"Password"} name={"lPass"} />
+                <Input type={"text"} placeHolder={"Email or phone number"} name={"lKey"} regexPattern={"(?=[^a-zA-Z ])"}/>
+                <Input type={"password"} placeHolder={"Password"} name={"lPass"} regexPattern={"(?=[^a-zA-Z ])"}/>
             </div>
             <Button isSubmit={true} type={"primary"} rounded={"rounded-lg"} label={"Log In"}/>
         </form>

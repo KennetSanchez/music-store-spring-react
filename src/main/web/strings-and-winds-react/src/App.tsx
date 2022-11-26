@@ -7,6 +7,7 @@ import {Home} from "./pages/Home";
 import {Landing} from "./pages/Landing";
 import {Navbar} from "./components/Navbar";
 import {Orders} from "./pages/Orders";
+import { SignUp } from './pages/SignUp';
 
 const App = () => {
 
@@ -29,6 +30,9 @@ const App = () => {
               <Route path={"/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
               <Route path={"/orders"} element={<Orders/>}/>
               <Route path={"/account"} element={<Account/>}/>
+              <Route path={"/sign-up"} element={<SignUp/>}/>
+              <Route path={"*"} element={<Account/>}/>
+
           </Routes>
       </div>
   );
