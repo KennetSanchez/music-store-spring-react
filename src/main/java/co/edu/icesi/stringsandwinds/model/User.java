@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +27,11 @@ public class User {
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID userId;
 
-    private String username;
+    @NotEmpty
+    private String firstName;
+
+    @NotEmpty
+    private String lastName;
 
     @ElementCollection
     private List<String> emails;
@@ -36,7 +41,7 @@ public class User {
 
     private String address;
 
-    private String hash;
+    private String hashesPassword;
 
     private UUID roleId;
 }
