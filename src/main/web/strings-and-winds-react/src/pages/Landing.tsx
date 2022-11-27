@@ -12,9 +12,7 @@ export const Landing = (
 ) => {
     const navigate = useNavigate();
 
-    const [login, setLogin] = useState()
-
-    const axios = require('axios');
+    const [token, setToken] = useState("")
 
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
 
@@ -23,26 +21,28 @@ export const Landing = (
         let form = (e.target as HTMLFormElement);
         props.loginState[1](true);
         props.adminState[1](false);
-        navigate("/home")
-        // Not working yet "Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported"
-        //signIn(form.lKey.value, form.lPass.value);
+        signIn(form.lKey.value, form.lPass.value);
     }
 
     async function signIn(key: String, pass: String) {
         const payLoad = { email: key, password: pass }
         let res = await fetch("http://localhost:8080/login", {
             method: 'POST',
-            mode:"no-cors",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(payLoad)
         })
             .then(response => response.json())
-            .then(response => console.log(JSON.stringify(response)))
+            .then(response => setToken(response))
     }
 
+    useEffect(()=>{
+        if(token != ""){
+            console.log(token)
+            navigate("/home")
+        }
+    }, [token])
 
     const handleSignUp = () => {
         navigate("/sign-up")

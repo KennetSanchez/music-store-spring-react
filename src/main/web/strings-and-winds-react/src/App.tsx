@@ -8,6 +8,9 @@ import {Landing} from "./pages/Landing";
 import {Navbar} from "./components/Navbar";
 import {Orders} from "./pages/Orders";
 import { SignUp } from './pages/SignUp';
+import { PublishItem } from './pages/PublisItem';
+import { UnknownUrl } from './pages/UnknownUrl';
+
 
 const App = () => {
 
@@ -25,13 +28,14 @@ const App = () => {
           <Navbar isLogged={isLogged} isAdmin={isAdmin} handleLogout={handleLogout}/>
           <Routes>
               <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]} loginState={[isLogged, setIsLogged]}/>}/>
-              <Route path={"/home"} element={<Home/>}/>
-              <Route path={"/users"} element={<Users/>}/>
-              <Route path={"/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
-              <Route path={"/orders"} element={<Orders/>}/>
-              <Route path={"/account"} element={<Account/>}/>
+              <Route path={"user/home"} element={<Home/>}/>
+              <Route path={"admin/users"} element={<Users/>}/>
+              <Route path={"user/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
+              <Route path={"user/orders"} element={<Orders/>}/>
+              <Route path={"user/account"} element={<Account/>}/>
               <Route path={"/sign-up"} element={<SignUp/>}/>
-              <Route path={"*"} element={<Account/>}/>
+              <Route path={"admin/publish-item"} element={<PublishItem/>}/>
+              <Route path={"*"} element={<UnknownUrl/>}/>
 
           </Routes>
       </div>

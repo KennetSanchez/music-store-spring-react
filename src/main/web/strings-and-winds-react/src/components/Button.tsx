@@ -6,8 +6,10 @@ export const Button = (
         isSubmit : boolean,
         type : string,
         rounded : string,
-        label : string
+        label : string,
+        extraClass? : string
     }
+
 ) => {
     const bType : string = props.isSubmit ? "submit" : "button";
 
@@ -16,6 +18,8 @@ export const Button = (
     const shadow : string = "drop-shadow-md";
     const squareSize : string = "h-14 w-14";
     const size : string = "h-10 w-36";
+
+    const givenClass = props.extraClass !=undefined? props.extraClass : ""
 
     const types = () => {
         switch (props.type) {
@@ -31,8 +35,8 @@ export const Button = (
         }
     }
     if (props.isSubmit) return (
-        <input name={props.label.toLowerCase()} type={"submit"} className={`${props.rounded} ${types()}`} value={props.label}/>
+        <input name={props.label.toLowerCase()} type={"submit"} className={`${givenClass} ${props.rounded} ${types()}`} value={props.label}/>
     ); else return (
-        <input name={props.label.toLowerCase()} type={"button"} onClick={props.onClick} className={`${props.rounded} ${types()}`} value={props.label}/>
+        <input name={props.label.toLowerCase()} type={"button"} onClick={props.onClick} className={`${givenClass} ${props.rounded} ${types()}`} value={props.label}/>
     );
 }
