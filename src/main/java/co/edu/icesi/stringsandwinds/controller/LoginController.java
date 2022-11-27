@@ -7,10 +7,11 @@ import co.edu.icesi.stringsandwinds.dto.LoginDTO;
 import co.edu.icesi.stringsandwinds.dto.TokenDTO;
 import co.edu.icesi.stringsandwinds.service.LoginService;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
-@RestController
+@RestController("/login")
 public class LoginController implements LoginAPI {
 
 

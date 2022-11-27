@@ -23,19 +23,16 @@ export const Landing = (
         let form = (e.target as HTMLFormElement);
         props.loginState[1](true);
         props.adminState[1](false);
-        navigate("/home")
+        signIn(form.lKey.value, form.lPass.value);
         // Not working yet "Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported"
-        //signIn(form.lKey.value, form.lPass.value);
     }
 
     async function signIn(key: String, pass: String) {
         const payLoad = { email: key, password: pass }
         let res = await fetch("http://localhost:8080/login", {
             method: 'POST',
-            mode:"no-cors",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(payLoad)
         })

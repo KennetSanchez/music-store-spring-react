@@ -5,7 +5,6 @@ import co.edu.icesi.stringsandwinds.constant.UserErrorCode;
 import co.edu.icesi.stringsandwinds.utils.JWTParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.MalformedJwtException;
 import liquibase.repackaged.org.apache.commons.lang3.StringUtils;
 import lombok.SneakyThrows;
@@ -37,7 +36,6 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         try {
             if(containsToken(request)){
                 String jwtToken = request.getHeader(AUTHORIZATION_HEADER).replace(TOKEN_PREFIX, StringUtils.EMPTY);
