@@ -1,2 +1,2 @@
 INSERT INTO "USERS" (id, email, address, phone_number, first_name, last_name, hashed_password, last_time_searched) VALUES
-    ('00000000-0000-0000-0000-000000000000', 'icesista@icesi.edu.com', 'Calle siempre viva 123 no es falsa','+573009876543', 'Root', 'Admin', '389531038e40f30b9780c7c9e31fd87dd6f044a755f47bd1ca7ef879afb514bf', null);
+    ('00000000-0000-0000-0000-000000000000', 'icesista@icesi.edu.com', 'Calle siempre viva 123 no es falsa','+573009876543', 'Root', 'Admin', 'c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f', null);
