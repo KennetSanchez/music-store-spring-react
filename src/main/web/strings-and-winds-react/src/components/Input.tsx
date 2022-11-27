@@ -21,17 +21,12 @@ export const Input = (
         const text = element.value
         const validText = regexPattern.test(text)
         let elementClass = element.className.replace('invalid ', '').replace('valid ', '')
-
-        console.log(elementClass)
         
         if(validText){
             element.setAttribute('class', 'valid ' + elementClass) 
         }else{
             element.setAttribute('class', 'invalid ' + elementClass) 
         }
-        console.log(element.className)
-
-
     }
 
     return (

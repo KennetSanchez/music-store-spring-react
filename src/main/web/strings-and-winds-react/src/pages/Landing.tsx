@@ -1,16 +1,20 @@
-import React, {FormEvent, useState} from "react";
-import {GlassCard} from "../components/GlassCard";
-import {Button} from "../components/Button";
-import {redirect, useNavigate} from "react-router-dom";
-import {LoginForm} from "../components/LoginForm";
+import React, { FormEvent, useEffect, useState } from "react";
+import { GlassCard } from "../components/GlassCard";
+import { Button } from "../components/Button";
+import { redirect, useNavigate } from "react-router-dom";
+import { LoginForm } from "../components/LoginForm";
 
 export const Landing = (
     props: {
-        loginState : [any,  React.Dispatch<React.SetStateAction<any>>],
-        adminState : [any,  React.Dispatch<React.SetStateAction<any>>]
+        loginState: [any, React.Dispatch<React.SetStateAction<any>>],
+        adminState: [any, React.Dispatch<React.SetStateAction<any>>]
     }
 ) => {
     const navigate = useNavigate();
+
+    const [login, setLogin] = useState()
+
+    const axios = require('axios');
 
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
 
@@ -19,12 +23,28 @@ export const Landing = (
         let form = (e.target as HTMLFormElement);
         props.loginState[1](true);
         props.adminState[1](false);
-        console.log(`Key: ${form.lKey.value}`);
-        console.log(`Pass: ${form.lPass.value}`);
-        navigate("/home");
+        navigate("/home")
+        // Not working yet "Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported"
+        //signIn(form.lKey.value, form.lPass.value);
     }
 
-    const handleSignUp = () =>{
+    async function signIn(key: String, pass: String) {
+        const payLoad = { email: key, password: pass }
+        let res = await fetch("http://localhost:8080/login", {
+            method: 'POST',
+            mode:"no-cors",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payLoad)
+        })
+            .then(response => response.json())
+            .then(response => console.log(JSON.stringify(response)))
+    }
+
+
+    const handleSignUp = () => {
         navigate("/sign-up")
     }
 
@@ -33,15 +53,19 @@ export const Landing = (
             <GlassCard position={"z-10 absolute inset-x-0 mx-auto mt-24"} padding={"py-12 px-16"} size={"h-[32rem] w-96"} color={"bg-purple-100/25"} spacing={"space-y-24"}>
                 <h3 className={"text-2xl"}>LOGIN</h3>
                 <div className={"h-full flex flex-col items-center justify-between"}>
-                    <LoginForm handleLogin={handleLogin}/>
+                    <LoginForm handleLogin={handleLogin} />
                     <div className={"underline underline-offset-4 text-xs text-purple-50 hover:text-purple-300 hover:cursor-pointer"} onClick={handleSignUp}>Dont have an account yet?</div>
                 </div>
             </GlassCard>
 
-            <div className={"absolute object-fit h-full w-full bg-gradient-to-l from-black via-fuchsia-900/50 to-transparent opacity-40 bg-top-center"}/>
-            <div className={"absolute object-fit h-full w-full bg-black/20 bg-top-center"}/>
+            <div className={"absolute object-fit h-full w-full bg-gradient-to-l from-black via-fuchsia-900/50 to-transparent opacity-40 bg-top-center"} />
+            <div className={"absolute object-fit h-full w-full bg-black/20 bg-top-center"} />
             <div className={"w-full h-full bg-no-repeat bg-cover bg-center"}
-                 style={{backgroundImage: 'url(' + bgImage + ')'}}/>
+                style={{ backgroundImage: 'url(' + bgImage + ')' }} />
         </div>
     );
+}
+
+function signIn() {
+    throw new Error("Function not implemented.");
 }
