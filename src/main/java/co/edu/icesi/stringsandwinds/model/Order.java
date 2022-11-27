@@ -32,5 +32,5 @@ public class Order {
 
     /* Relations */
 
-    private Map<UUID, Integer> orderItems;
+    //private Map<UUID, Integer> orderItems;
 }
