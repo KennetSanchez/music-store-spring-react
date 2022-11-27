@@ -1,31 +1,26 @@
 package co.edu.icesi.stringsandwinds.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserPublicDTO {
 
     private UUID id;
 
-    @Column(unique = true)
     private String email;
 
-    @Column(unique = true)
     private String phoneNumber;
 
     private String firstName;
 
     private String lastName;
 
-    private String password;
-
     private LocalDate lastTimeSearched;
-
-
 }

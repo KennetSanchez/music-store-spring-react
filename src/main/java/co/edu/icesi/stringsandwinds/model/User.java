@@ -5,13 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
-import javax.persistence.ElementCollection;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
+
 
 @Data
 @Table(name = "USERS")
@@ -21,24 +22,26 @@ import java.util.UUID;
 @AllArgsConstructor
 public class User {
 
-    /* Intrinsic user fields */
     @Id
-    @Type(type = "org.hibernate.type.UUIDCharType")
-    private UUID userId;
-
-    @NotEmpty
-    private String firstName;
-
-    @NotEmpty
-    private String lastName;
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID id;
 
     private String email;
 
     private String phoneNumber;
 
-    private String address;
+    private String firstName;
+
+    private String lastName;
 
     private String hashedPassword;
 
-    private UUID roleId;
+    private LocalDate lastTimeSearched;
+
+
+    @PrePersist
+    public void generateId(){
+        this.id = UUID.randomUUID();
+    }
+
 }
