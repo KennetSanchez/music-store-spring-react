@@ -13,9 +13,7 @@ export const PaymentOptions = (
     }
 
     useEffect(()=>{
-        switch (selected) {
-
-        }
+        document.getElementById(selected)!!.className.replace(" grayscale ", "");
     })
 
     return (
