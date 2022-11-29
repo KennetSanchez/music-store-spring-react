@@ -1,8 +1,9 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { GlassCard } from "../components/GlassCard";
 import { Button } from "../components/Button";
 import { redirect, useNavigate } from "react-router-dom";
 import { LoginForm } from "../components/LoginForm";
+import { UserToken } from "../App";
 
 export const Landing = (
     props: {
@@ -12,7 +13,7 @@ export const Landing = (
 ) => {
     const navigate = useNavigate();
 
-    const [token, setToken] = useState("")
+    const {token, setToken} = useContext(UserToken)
 
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
 
@@ -22,6 +23,9 @@ export const Landing = (
         props.loginState[1](true);
         props.adminState[1](false);
         signIn(form.lKey.value, form.lPass.value);
+        if(token != ""){
+            navigate("user/home")
+        }
     }
 
     async function signIn(key: String, pass: String) {
@@ -34,15 +38,8 @@ export const Landing = (
             body: JSON.stringify(payLoad)
         })
             .then(response => response.json())
-            .then(response => setToken(response))
+            .then(response => setToken(response.token))
     }
-
-    useEffect(()=>{
-        if(token != ""){
-            console.log(token)
-            navigate("/home")
-        }
-    }, [token])
 
     const handleSignUp = () => {
         navigate("/sign-up")

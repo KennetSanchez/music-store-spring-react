@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {Route, Routes, useNavigate} from "react-router-dom";
 import {Account} from "./pages/Account";
 import {Cart} from "./pages/Cart";
@@ -11,20 +11,37 @@ import { SignUp } from './pages/SignUp';
 import { PublishItem } from './pages/PublisItem';
 import { UnknownUrl } from './pages/UnknownUrl';
 
+export const UserToken = React.createContext({
+    token: "", 
+    setToken:(newToken:string)=>{}
+});
 
 const App = () => {
 
-    let [isLogged, setIsLogged] = useState(false);
-    let [isAdmin, setIsAdmin] = useState(false);
-    let [cart, setCart] = useState([]);
-    let [cartItemCount, setCartItemCount] = useState(0);
+
+    function updateToken (newToken : string){state.token = newToken}
+    //const updateToken = (newToken : string)=>{state.token = newToken}
+
+    const [state, setState] = useState(()=> ({
+        token : "",
+        setToken : (newToken:string)=>{updateToken(newToken)}
+    }))
+
+    const [isLogged, setIsLogged] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [cart, setCart] = useState([]);
+    const [cartItemCount, setCartItemCount] = useState(0);
 
     const handleLogout = (e : React.MouseEvent<HTMLAnchorElement>) => {
+        state.setToken("")
         setIsLogged(false);
     }
 
+    
+
     return (
-      <div className={"h-screen"}>
+      <UserToken.Provider value={state} >
+        <div className={"h-screen"}>
           <Navbar isLogged={isLogged} isAdmin={isAdmin} handleLogout={handleLogout}/>
           <Routes>
               <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]} loginState={[isLogged, setIsLogged]}/>}/>
@@ -36,9 +53,9 @@ const App = () => {
               <Route path={"/sign-up"} element={<SignUp/>}/>
               <Route path={"admin/publish-item"} element={<PublishItem/>}/>
               <Route path={"*"} element={<UnknownUrl/>}/>
-
           </Routes>
-      </div>
+        </div>
+      </UserToken.Provider>
   );
 }
 
