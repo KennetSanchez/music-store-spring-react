@@ -34,7 +34,6 @@ const App = () => {
 
     const handleLogout = (e : React.MouseEvent<HTMLAnchorElement>) => {
         state.setToken("")
-        setIsLogged(false);
     }
 
     
@@ -44,7 +43,7 @@ const App = () => {
         <div className={"h-screen"}>
           <Navbar isLogged={isLogged} isAdmin={isAdmin} handleLogout={handleLogout}/>
           <Routes>
-              <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]} loginState={[isLogged, setIsLogged]}/>}/>
+              <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]}/>}/>
               <Route path={"user/home"} element={<Home/>}/>
               <Route path={"admin/users"} element={<Users/>}/>
               <Route path={"user/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>

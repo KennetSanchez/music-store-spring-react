@@ -33,9 +33,12 @@ public class LoginServiceImpl implements LoginService {
         User user = StreamSupport.stream(repository.findAll().spliterator(), false)
                 .filter(currentUser -> currentUser.getEmail().equals(loginDTO.getEmail()))
                 .findFirst()
-                .orElseThrow();
-
-        return authenticatePassword(user, loginDTO);
+                .orElse(null);
+        if(user!= null){
+            return authenticatePassword(user, loginDTO);
+        }else{
+            throw new UserException(HttpStatus.NOT_ACCEPTABLE, new UserError(UserErrorCode.CODE_11, UserErrorCode.CODE_11.getMessage()));
+        }
     }
 
     @SneakyThrows

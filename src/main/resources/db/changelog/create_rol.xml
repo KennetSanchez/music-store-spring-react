@@ -4,17 +4,13 @@
 
     <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750d" author="S_W" failOnError="true">
 
-        <createTable tableName="USERS">
-            <column name="id" type="UUID">
+        <createTable tableName="ROLES">
+            <column name="rol_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
-            <column name="user_rol_id" type="UUID" />
-            <column name="email" type="varchar(255)" />
-            <column name="address" type="varchar(255)" />
-            <column name="phone_number" type="varchar(255)" />
-            <column name="first_name" type="varchar(255)" />
-            <column name="last_name" type="varchar(255)" />
-            <column name="hashed_password" type="varchar(255)" />
+            <column name="name" type="varchar(50)" />
+            <column name="description" type="varchar(250)" />
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

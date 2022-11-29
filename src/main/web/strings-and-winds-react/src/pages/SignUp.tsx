@@ -14,12 +14,51 @@ export const SignUp = (
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
     const navigate = useNavigate();
 
+    const USER_ROL = "57992376-bdde-40c2-be47-ba7808bd09ce"
+
+    async function signUp(
+            rol:  string,
+            fName : string,
+            lName : string,
+            givenAddress: string = "",
+            givenEmail:  string = "",
+            givenPhoneNumber: string ="",
+            givenPassword: string,
+        ){
+
+        const payLoad = { 
+            userRolId: rol,
+            firstName: fName,
+            lastName: lName,
+            phoneNumber: givenPhoneNumber,
+            address: givenAddress,
+            email: givenEmail,
+            password: givenPassword            
+        }
+
+        await fetch("http://localhost:8080/users", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payLoad)
+        })
+            .then(response => response.json())
+            .then(response => {
+                setToken(response.token)
+                if(response.token != ""){
+                    navigate("/user/home")
+                }
+            })
+    }
 
     const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let form = (e.target as HTMLFormElement);
-        if(verifyInputs())
-            navigate("/home")
+        if(verifyInputs()){
+            signUp(USER_ROL, form.lFirstName.value, form.lLastName.value, 
+                form.lAddress.value, form.lEmail.value, form.lPhoneNumber.value, form.lPass.value)
+        }
     }
 
     function verifyInputs() : boolean{

@@ -32,7 +32,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String USER_ID_CLAIM_NAME = "userId";
-    private static final String[] EXCLUDE_PATHS = {"POST /login", "POST /signUp"};
+    private static final String[] EXCLUDE_PATHS = {"POST /login", "POST /users"};
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

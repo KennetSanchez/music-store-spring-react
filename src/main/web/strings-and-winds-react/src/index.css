@@ -14,10 +14,10 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    -webkit-text-fill-color: theme("colors.purple.900") inset;
-    -webkit-box-shadow: 0 0 0 1000px theme("colors.purple.300") inset;
-    box-shadow: 0 0 0 1000px theme("colors.purple.300") inset;
-    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: theme("colors.gray.50") inset;
+    -webkit-box-shadow: 0 0 0 1000px theme("colors.transparent") inset;
+    box-shadow: 0 0 0 1000px theme("colors.transparent") inset;
+    transition: background-color 5000s ease-in-out 0s;   
 }
 
 @layer base {

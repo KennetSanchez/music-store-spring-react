@@ -19,8 +19,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Role {
 
-    /* Intrinsic user fields */
-
     @Id
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID roleId;
@@ -28,8 +26,5 @@ public class Role {
     private String name;
 
     private String description;
-
-    /* References */
-
 
 }

@@ -1,3 +1,10 @@
+
+Input,
+Input:-webkit-autofill
+{
+  color: white
+}
+
 #shippingSection{
   display: grid;
   grid-template-columns: 2;

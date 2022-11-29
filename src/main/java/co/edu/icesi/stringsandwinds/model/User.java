@@ -1,15 +1,9 @@
 package co.edu.icesi.stringsandwinds.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -28,6 +22,11 @@ public class User {
 
     private String email;
 
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID userRolId;
+
+    private String address;
+
     private String phoneNumber;
 
     private String firstName;
@@ -35,9 +34,6 @@ public class User {
     private String lastName;
 
     private String hashedPassword;
-
-    private LocalDate lastTimeSearched;
-
 
     @PrePersist
     public void generateId(){
