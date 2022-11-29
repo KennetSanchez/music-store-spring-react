@@ -19,13 +19,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Permission {
 
-    /* Intrinsic user fields */
-
     @Id
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID permissionId;
 
     private String URI;
-
-    private String key;
 }

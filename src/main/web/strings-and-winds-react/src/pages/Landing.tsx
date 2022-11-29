@@ -7,7 +7,6 @@ import { UserToken } from "../App";
 
 export const Landing = (
     props: {
-        loginState: [any, React.Dispatch<React.SetStateAction<any>>],
         adminState: [any, React.Dispatch<React.SetStateAction<any>>]
     }
 ) => {
@@ -19,18 +18,18 @@ export const Landing = (
 
     const handleLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        let form = (e.target as HTMLFormElement);
-        props.loginState[1](true);
-        props.adminState[1](false);
+        let form = (e.target as HTMLFormElement);        
         signIn(form.lKey.value, form.lPass.value);
-        if(token != ""){
-            navigate("user/home")
+        if(token != undefined){
+            navigate("/user/home")   
+        }else{
+            alert("This credentials aren't valid")
         }
     }
 
     async function signIn(key: String, pass: String) {
         const payLoad = { email: key, password: pass }
-        let res = await fetch("http://localhost:8080/login", {
+        await fetch("http://localhost:8080/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,8 +60,4 @@ export const Landing = (
                 style={{ backgroundImage: 'url(' + bgImage + ')' }} />
         </div>
     );
-}
-
-function signIn() {
-    throw new Error("Function not implemented.");
 }

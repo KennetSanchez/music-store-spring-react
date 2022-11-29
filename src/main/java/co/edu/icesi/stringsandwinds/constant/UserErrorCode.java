@@ -17,8 +17,9 @@ public enum UserErrorCode {
     CODE_07("The password it's not the expected one. Try again"),
     CODE_08("Unauthorized. In order to create new users you need to be logged."),
     CODE_09("Unauthorized. Due to security reasons, you can only get the information of yourself"),
-    CODE_10("The user must have at least one contact way (email or phone)");
+    CODE_10("The user must have at least one contact way (email or phone)"),
 
+    CODE_11("User not found");
 
     private final String message;
 }

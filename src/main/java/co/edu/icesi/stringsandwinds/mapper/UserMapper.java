@@ -14,9 +14,7 @@ public interface UserMapper {
     User fromDTO(UserDTO userDTO);
 
     @Mapping(source = "hashedPassword", target = "password")
-
     UserDTO fromUser(User user);
 
     UserPublicDTO fromPublicUser(User user);
-
 }

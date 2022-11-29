@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     public User getUser(UUID userId) {
         User user = userRepository.findById(userId).orElse(null);
         if(user != null){
-            user.setLastTimeSearched(LocalDate.now());
             userRepository.save(user);
         }
         return user;

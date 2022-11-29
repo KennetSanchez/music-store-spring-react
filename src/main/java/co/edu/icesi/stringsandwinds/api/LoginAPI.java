@@ -11,7 +11,7 @@ import javax.validation.Valid;
 @RequestMapping("/login")
 public interface LoginAPI {
 
-    @PostMapping("")
+    @PostMapping()
     TokenDTO login(@RequestBody @Valid LoginDTO loginDTO);
 
 }

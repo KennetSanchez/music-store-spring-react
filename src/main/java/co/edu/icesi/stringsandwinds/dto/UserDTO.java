@@ -25,7 +25,5 @@ public class UserDTO {
 
     private String password;
 
-    private LocalDate lastTimeSearched;
-
-
+    private UUID userRolId;
 }
