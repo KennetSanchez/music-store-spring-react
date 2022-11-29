@@ -1,14 +1,16 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import { GlassCard } from "../components/GlassCard";
 import { Input } from "../components/Input";
 import { SignUpForm } from "../components/SignUpForm";
 import {redirect, useNavigate} from "react-router-dom";
 import { forEachChild } from "typescript";
+import { UserToken } from "../App";
 
 export const SignUp = (
     props: {}
 ) => {
 
+    const {token, setToken} = useContext(UserToken)
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
     const navigate = useNavigate();
 
