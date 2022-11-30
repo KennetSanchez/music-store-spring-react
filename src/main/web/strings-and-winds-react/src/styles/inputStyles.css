@@ -1,4 +1,8 @@
 
+#shippingBoolean{
+  visibility: collapse;
+}
+
 Input,
 Input:-webkit-autofill
 {

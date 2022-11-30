@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -38,4 +39,7 @@ public class Item {
     private float basePrice;
 
     private float shippingPrice;
+
+    @PrePersist
+    public void generateId(){this.itemId = UUID.randomUUID();}
 }

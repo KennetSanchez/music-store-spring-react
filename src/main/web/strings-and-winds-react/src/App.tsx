@@ -19,8 +19,8 @@ export const UserToken = React.createContext({
 const App = () => {
 
 
-    function updateToken (newToken : string){state.token = newToken}
-    //const updateToken = (newToken : string)=>{state.token = newToken}
+    //function updateToken (newToken : string){state.token = newToken}
+    const updateToken = (newToken : string)=>{state.token = newToken}
 
     const [state, setState] = useState(()=> ({
         token : "",
