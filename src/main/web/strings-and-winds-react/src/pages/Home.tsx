@@ -5,12 +5,13 @@ export const Home = (
     props: {}
 ) => {
     const {token, setToken} = useContext(UserToken);
+    document.getElementById("body")?.setAttribute("class", "overflow-auto")
     
-    console.log(token)
+    
     return (
         <div>
             <div className={"absolute w-full h-full px-24 pt-32"}>
-                <h2 className={"t-test"}>This is Home</h2>
+                
             </div>
         </div>
     );

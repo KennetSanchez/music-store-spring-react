@@ -10,6 +10,9 @@ export const Landing = (
         adminState: [any, React.Dispatch<React.SetStateAction<any>>]
     }
 ) => {
+
+    document.getElementById("body")?.setAttribute("class", "overflow-hidden")
+
     const navigate = useNavigate();
 
     const {token, setToken} = useContext(UserToken)

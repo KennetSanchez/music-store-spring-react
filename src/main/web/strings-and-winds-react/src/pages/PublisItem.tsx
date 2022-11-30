@@ -7,6 +7,7 @@ import { useContext } from"react"
 
 export const PublishItem = () => {
     const navigate = useNavigate();
+    document.getElementById("body")?.setAttribute("class", "overflow-hidden")
 
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
 

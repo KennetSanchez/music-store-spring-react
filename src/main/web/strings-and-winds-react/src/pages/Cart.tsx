@@ -15,6 +15,7 @@ export const Cart = (
 ) => {
 
     const itemCountMessage = props.itemCountState[0] <=0 ? <h3 className={"text-right"}>NO ITEMS IN CART</h3> : <h3>{props.itemCountState[0]} ITEMS</h3>
+    document.getElementById("body")?.setAttribute("class", "overflow-auto")
 
     const mapCartItems = () => {
         if (props.itemCountState[0] === 0) {
