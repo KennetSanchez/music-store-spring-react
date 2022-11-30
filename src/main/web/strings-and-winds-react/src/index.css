@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.hideScrollBar{
+    overflow: hidden;
+}
+
+
 /* Change Autocomplete styles in Chrome */
 
 /*noinspection CssInvalidPropertyValue*/

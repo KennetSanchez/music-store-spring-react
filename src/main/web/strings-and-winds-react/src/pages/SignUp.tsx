@@ -10,6 +10,8 @@ export const SignUp = (
     props: {}
 ) => {
 
+    document.getElementById("body")?.setAttribute("class", "overflow-hidden")
+
     const {token, setToken} = useContext(UserToken)
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
     const navigate = useNavigate();

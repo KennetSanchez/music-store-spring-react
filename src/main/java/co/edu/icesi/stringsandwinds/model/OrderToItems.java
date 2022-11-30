@@ -13,21 +13,20 @@ import java.util.Map;
 import java.util.UUID;
 
 @Data
-@Table(name = "ORDERS")
+@Table(name = "ORDERS_TO_ITEMS")
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class OrderToItems {
 
     @Id
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID orderId;
 
     @Id
-    private UUID costumerId;
+    @Type(type = "org.hibernate.type.UUIDCharType")
+    private UUID itemId;
 
-    private float total;
-
-    private String status;
+    private int quantity;
 }
