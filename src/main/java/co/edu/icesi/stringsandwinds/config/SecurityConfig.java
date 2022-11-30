@@ -22,6 +22,7 @@ public class SecurityConfig {
         return http
                 .cors(Customizer.withDefaults())
                 .authorizeRequests().antMatchers("http://localhost:3000", "http://localhost:3000/login").permitAll().and()
+                .authorizeRequests().antMatchers("https://localhost:3000/admin/publish-item").permitAll().and()
                 .httpBasic(Customizer.withDefaults())
                 .csrf().disable()
                 .build();
@@ -31,7 +32,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedHeaders(List.of("Content-Type", "Accept", "Access-Control-Allow-Origin"));
+        configuration.setAllowedHeaders(List.of("Content-Type", "Accept", "Access-Control-Allow-Origin", "Authorization"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

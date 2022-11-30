@@ -12,15 +12,29 @@ export const ItemForm = (
     const formFlex: string = "h-full flex flex-col justify-between items-center pb-4";
     let includesShipping = true;
 
-    function toggleShipping() {
-        includesShipping = !includesShipping
+    
 
+    
+    function toggleShipping() {
+
+        const shippingYesElement = document.getElementById("shippingSectionYes") as HTMLInputElement;
+        const shippingNotElement = document.getElementById("shippingSectionNo") as HTMLInputElement;
+        const shippingPriceInput = document.getElementById("shippingPriceInput") as HTMLInputElement;
+        const shippingBooleanInput = document.getElementById("shippingBoolean") as HTMLInputElement;
+
+        includesShipping = !includesShipping
         if (includesShipping) {
-            document.getElementById("shippingSectionYes")?.setAttribute("class", "shippingSelected")
-            document.getElementById("shippingSectionNo")?.setAttribute("class", "shippingNotSelected")
+            shippingYesElement.setAttribute("class", "shippingSelected")
+            shippingNotElement.setAttribute("class", "shippingNotSelected")
+            shippingPriceInput.style["visibility"] = "visible";
+            shippingBooleanInput.checked = true;
         } else {
-            document.getElementById("shippingSectionNo")?.setAttribute("class", "shippingSelected")
-            document.getElementById("shippingSectionYes")?.setAttribute("class", "shippingNotSelected")
+            shippingNotElement.setAttribute("class", "shippingSelected")
+            shippingYesElement.setAttribute("class", "shippingNotSelected")
+            shippingPriceInput.style["visibility"] = "hidden";
+            shippingPriceInput.value = "";
+            shippingBooleanInput.checked = false;
+
         }
     }
 
@@ -29,8 +43,10 @@ export const ItemForm = (
             <section id="inputFormSection" className={"mx-auto grid grid-cols-2 gap-20 pb-10"}>
                 <Input type={"text"} placeHolder={"Title"} name={"lTitle"} regexPattern={"(?=[a-zA-Z ])"} />
                 <Input type={"text"} placeHolder={"Description"} name={"lDescription"} regexPattern={"(?=[a-zA-Z ])"} />
-                <Input type={"number"} placeHolder={"Price"} name={"lPrice"} regexPattern={"(?=[\\d])"} />
-
+                <Input type={"number"} placeHolder={"Item price"} name={"lBasePrice"} regexPattern={"(?=[\\d])"} />
+                <Input id="shippingPriceInput" type={"number"} placeHolder={"Shipping price"} name={"lShippingPrice"} regexPattern={"(?=[\\d])"} />
+                <Input initialClassName="valid" id ="shippingBoolean" type={"checkbox"} placeHolder={"Shipping include"} name={"lShippingBoolean"} regexPattern={"on|off"}/>
+                
                 <section>
                     <p className="inputLabel">Includes shipping?</p>
                     <section id="shippingSection">

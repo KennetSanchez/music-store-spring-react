@@ -95,7 +95,6 @@ export const SignUp = (
             i++
         }
         return true
-
     }
 
     return (

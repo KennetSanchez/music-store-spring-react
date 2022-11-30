@@ -35,7 +35,7 @@ export const Landing = (
             .then(response => {
                 if(response.token != undefined){
                     setToken(response.token);
-                    navigate("/user/home");
+                    navigate("/admin/publish-item");
                 }else{
                     alert("Error " + response.code + "\n" + response.message);
                 }
