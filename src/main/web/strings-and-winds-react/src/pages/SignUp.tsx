@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { GlassCard } from "../components/GlassCard";
 import { Input } from "../components/Input";
 import { SignUpForm } from "../components/SignUpForm";
@@ -44,12 +44,7 @@ export const SignUp = (
             body: JSON.stringify(payLoad)
         })
             .then(response => response.json())
-            .then(response => {
-                setToken(response.token)
-                if(response.token !== ""){
-                    navigate("/user/home")
-                }
-            })
+            .then(response => setToken(response.token))
     }
 
     const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
