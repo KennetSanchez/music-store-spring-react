@@ -7,7 +7,7 @@ export const Button = (
         type : string,
         rounded : string,
         label : string,
-        extraClass? : string
+        extraClass? : string,
     }
 
 ) => {

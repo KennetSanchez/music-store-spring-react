@@ -27,13 +27,12 @@ const App = () => {
         setToken : (newToken:string)=>{updateToken(newToken)}
     }))
 
-    const [isLogged, setIsLogged] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [cart, setCart] = useState([]);
     const [cartItemCount, setCartItemCount] = useState(0);
 
     const handleLogout = (e : React.MouseEvent<HTMLAnchorElement>) => {
-        state.setToken("")
+        state.setToken("");
     }
 
     
@@ -41,7 +40,7 @@ const App = () => {
     return (
       <UserToken.Provider value={state} >
         <div className={"h-screen"}>
-          <Navbar isLogged={isLogged} isAdmin={isAdmin} handleLogout={handleLogout}/>
+          <Navbar isAdmin={isAdmin} handleLogout={handleLogout}/>
           <Routes>
               <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]}/>}/>
               <Route path={"user/home"} element={<Home/>}/>

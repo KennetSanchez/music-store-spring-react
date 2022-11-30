@@ -16,15 +16,10 @@ export const Landing = (
 
     let [bgImage, setBgImage] = useState("/images/bg_eguitar_1920.jpg");
 
-    const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    async function handleLogin(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
-        let form = (e.target as HTMLFormElement);        
-        signIn(form.lKey.value, form.lPass.value);
-        if(token != undefined){
-            navigate("/user/home")   
-        }else{
-            alert("This credentials aren't valid")
-        }
+        let form = (e.target as HTMLFormElement);
+        await signIn(form.lKey.value, form.lPass.value);
     }
 
     async function signIn(key: String, pass: String) {
@@ -37,7 +32,14 @@ export const Landing = (
             body: JSON.stringify(payLoad)
         })
             .then(response => response.json())
-            .then(response => setToken(response.token))
+            .then(response => {
+                if(response.token != undefined){
+                    setToken(response.token);
+                    navigate("/user/home");
+                }else{
+                    alert("Error " + response.code + "\n" + response.message);
+                }
+            })
     }
 
     const handleSignUp = () => {

@@ -1,17 +1,18 @@
 import {Link} from "react-router-dom";
 import {Logo} from "./Logo";
-import React from "react";
+import React, {useContext} from "react";
+import {UserToken} from "../App";
 
 export const Navbar = (
     props: {
-        isLogged : boolean,
         isAdmin : boolean,
         handleLogout : {(e : React.MouseEvent<HTMLAnchorElement>) : any}
     }
 ) => {
-
-    const navVariant : string = props.isLogged ? "justify-between" : "justify-center";
-    const linkTreeVariant : string = props.isLogged ? "text-base space-x-8" : "hidden w-0 h-0";
+    const {token, setToken} = useContext(UserToken)
+    let isLogged : boolean = token !== "";
+    const navVariant : string = isLogged ? "justify-between" : "justify-center";
+    const linkTreeVariant : string = isLogged ? "text-base space-x-8" : "hidden w-0 h-0";
 
     const checkIsAdmin = () => {
         return props.isAdmin ? <Link className={"nav_link"} to={"admin/users"}>Users</Link> : <Link className={"nav_link"} to={"user/cart"}>Cart</Link>

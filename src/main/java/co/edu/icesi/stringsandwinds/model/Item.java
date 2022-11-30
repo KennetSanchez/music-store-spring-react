@@ -9,6 +9,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
@@ -19,16 +21,20 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Item {
 
-    /* Intrinsic user fields */
-
     @Id
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID itemId;
 
+    @NotEmpty
     private String name;
 
+    @NotNull
+    private boolean includesShipping;
+
+    @NotEmpty
     private String description;
 
+    @NotNull
     private float basePrice;
 
     private float shippingPrice;
