@@ -26,17 +26,36 @@ export const SignUp = (
             givenPassword: string,
         ) => {
 
-        const payLoad = { 
-            userRolId: rol,
-            firstName: fName,
-            lastName: lName,
-            phoneNumber: givenPhoneNumber,
-            address: givenAddress,
-            email: givenEmail,
-            password: givenPassword            
-        }
+            const payLoad = { 
+                userRolId: rol,
+                firstName: fName,
+                lastName: lName,
+                phoneNumber: givenPhoneNumber,
+                address: givenAddress,
+                email: givenEmail,
+                password: givenPassword            
+            }
 
-        await fetch("http://localhost:8080/users", {
+            await fetch("http://localhost:8080/users", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payLoad)
+            })
+                .then(response => response.json())
+                .then(async response => {
+                    if(response.code != undefined ){
+                        alert("Error " + response.code + "\n" + response.message);
+                    }else{
+                        await userCreated(givenEmail, givenPassword);
+                    }
+                })
+        }
+    
+    const userCreated = async (givenEmail: string, givenPassword: string) =>{
+        const payLoad = { email: givenEmail, password: givenPassword }
+        await fetch("http://localhost:8080/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +63,14 @@ export const SignUp = (
             body: JSON.stringify(payLoad)
         })
             .then(response => response.json())
-            .then(response => setToken(response.token))
+            .then(response => {
+                if(response.token != undefined){
+                    setToken(response.token);
+                    navigate("/user/home");
+                }else{
+                    alert("Error " + response.code + "\n" + response.message);
+                }
+            })
     }
 
     const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {

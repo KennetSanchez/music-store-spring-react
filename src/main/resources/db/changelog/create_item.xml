@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750d" author="S_W" failOnError="true">
+
+        <createTable tableName="ITEMS">
+            <column name="item_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="varchar(50)" />
+            <column name="includes_shipping" type="boolean" />
+            <column name="description" type="varchar(50)" />
+            <column name="base_price" type="numeric" />
+            <column name="shipping_price" type="numeric" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

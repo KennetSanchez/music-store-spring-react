@@ -34,8 +34,8 @@ export const ItemForm = (
                 <section>
                     <p className="inputLabel">Includes shipping?</p>
                     <section id="shippingSection">
-                        <section id="shippingSectionYes" onClick={toggleShipping}>Yes</section>
-                        <section id="shippingSectionNo"  onClick={toggleShipping}>No</section>
+                        <section id="shippingSectionYes" className="shippingSelected" onClick={toggleShipping}>Yes</section>
+                        <section id="shippingSectionNo"  className="shippingNotSelected" onClick={toggleShipping}>No</section>
                     </section>
                 </section>
 
