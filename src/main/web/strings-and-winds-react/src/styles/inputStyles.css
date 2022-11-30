@@ -60,14 +60,36 @@ Input:-webkit-autofill
   background-color: #c184fd;
 }
 
-.valid {
+.valid, .valid:-internal-autofill-selected,
+.valid:-webkit-autofill,
+.valid:-webkit-autofill:hover,
+.valid:-webkit-autofill:focus,
+.valid:-webkit-autofill,
+.valid:-webkit-autofill:hover,
+.valid:-webkit-autofill:focus,
+.valid:-webkit-autofill,
+.valid:-webkit-autofill:hover,
+.valid:-webkit-autofill:focus {
   animation: heartbeat 1.5s ease-in-out both;
   background-color: rgba(0, 236, 0, 0.158);
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 236, 0, 0.158) inset;
+  box-shadow: 0 0 0 1000px rgba(0, 236, 0, 0.158) inset;
 }
 
-.invalid {
+.invalid, .invalid:-internal-autofill-selected,
+.invalid:-webkit-autofill,
+.invalid:-webkit-autofill:hover,
+.invalid:-webkit-autofill:focus,
+.invalid:-webkit-autofill,
+.invalid:-webkit-autofill:hover,
+.invalid:-webkit-autofill:focus,
+.invalid:-webkit-autofill,
+.invalid:-webkit-autofill:hover,
+.invalid:-webkit-autofill:focus {
   animation: vibrate-2 0.3s linear infinite both;
   background-color: rgba(236, 0, 0, 0.158);
+  -webkit-box-shadow: 0 0 0 1000px rgba(236, 0, 0, 0.158) inset !important;
+  box-shadow: 0 0 0 1000px rgba(236, 0, 0, 0.158) inset !important;
   border-radius: 3px;
 }
 /* ----------------------------------------------
