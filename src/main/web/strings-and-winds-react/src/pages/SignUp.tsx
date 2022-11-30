@@ -16,7 +16,7 @@ export const SignUp = (
 
     const USER_ROL = "57992376-bdde-40c2-be47-ba7808bd09ce"
 
-    async function signUp(
+    const signUp = async (
             rol:  string,
             fName : string,
             lName : string,
@@ -24,7 +24,7 @@ export const SignUp = (
             givenEmail:  string = "",
             givenPhoneNumber: string ="",
             givenPassword: string,
-        ){
+        ) => {
 
         const payLoad = { 
             userRolId: rol,
@@ -46,17 +46,17 @@ export const SignUp = (
             .then(response => response.json())
             .then(response => {
                 setToken(response.token)
-                if(response.token != ""){
+                if(response.token !== ""){
                     navigate("/user/home")
                 }
             })
     }
 
-    const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let form = (e.target as HTMLFormElement);
-        if(verifyInputs()){
-            signUp(USER_ROL, form.lFirstName.value, form.lLastName.value, 
+        if (verifyInputs()) {
+            await signUp(USER_ROL, form.lFirstName.value, form.lLastName.value,
                 form.lAddress.value, form.lEmail.value, form.lPhoneNumber.value, form.lPass.value)
         }
     }
