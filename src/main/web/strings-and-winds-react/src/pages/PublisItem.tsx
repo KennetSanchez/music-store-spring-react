@@ -1,9 +1,12 @@
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { GlassCard } from "../components/GlassCard";
 import { useNavigate } from "react-router-dom";
 import { ItemForm } from "../components/ItemForm";
 import { UserToken } from "../App";
 import { useContext } from"react"
+import {HeroSection} from "../components/HeroSection";
+import {PaymentOptions} from "../components/PaymentOptions";
+import {Button} from "../components/Button";
 
 export const PublishItem = () => {
     const navigate = useNavigate();
@@ -49,7 +52,7 @@ export const PublishItem = () => {
         givenDescription : string,
         givenBasePrice : number,
         givenShippingPrice : number,
-    ) =>{
+    ) => {
 
         const payLoad = { 
             name: givenName,
@@ -68,29 +71,30 @@ export const PublishItem = () => {
                 },
                 body: JSON.stringify(payLoad)
             })
-                .then(response => response.json())
-                .then(async response => {
-                    if(response.code != undefined ){
-                        alert("Error " + response.code + "\n" + response.message);
-                    }else{
-                        alert("Item creado exitosamente.")
-                    }
-                })
-        }
+            .then(response => response.json())
+            .then(async response => {
+                if(response.code != undefined ){
+                    alert("Error " + response.code + "\n" + response.message);
+                } else {
+                    alert("Item creado exitosamente.")
+                }
+            })
+    }
 
-    
+    let itemImage = "/images/no-image-saw.png";
+    const gradientStyle : string = "bg-gradient-to-l from-neutral-900 to-neutral-800/75 bg-center";
+    const hoverStyle : string = "hover:bg-[length:120%] hover:cursor-pointer";
+
     return (
-        <div className={"w-full h-full absolute"}>
-            <GlassCard position={"z-10 absolute inset-x-0 mx-auto mt-24"} padding={"py-12 px-16"} size={"h-[32rem] w-[50rem]"} color={"bg-purple-100/25"} spacing={"space-y-24"}>
-                <h3 className={"text-2xl"}>PUBLISH ITEM</h3>
-                <div className={"h-full flex flex-col items-center justify-between"}>
-                    <ItemForm id={"publishItemDiv"} handleCreation={handleCreation}/>
+        <div className={"w-full h-full relative"}>
+            <section className={"absolute w-full h-full px-24 pt-32"}>
+                <div className={"absolute h-2/3 w-1/2"}>
+                    <div className={`absolute h-full w-full rounded-md ${gradientStyle}`}/>
+                    <div className={`relative h-full w-full bg-no-repeat bg-cover bg-center rounded-md bg-clip-border ${hoverStyle}`}
+                         style={{backgroundImage: `url("${itemImage}")`}}/>
                 </div>
-            </GlassCard>
-            
-            <div className={"absolute object-fit h-full w-full bg-gradient-to-l from-black via-fuchsia-900/50 to-transparent opacity-40 bg-top-center"}/>
-            <div className={"absolute object-fit h-full w-full bg-black/20 bg-top-center"}/>
-            <div className={"w-full h-full bg-no-repeat bg-cover bg-center"} style={{backgroundImage: 'url(' + bgImage + ')'}}/>
+            </section>
+            <HeroSection/>
         </div>
     );
 }
