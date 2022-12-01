@@ -1,12 +1,11 @@
 package co.edu.icesi.stringsandwinds.model;
 
+import co.edu.icesi.stringsandwinds.constant.Roles;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.UUID;
-
 
 @Data
 @Table(name = "USERS")
@@ -17,13 +16,15 @@ import java.util.UUID;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
 
     private String email;
 
-    @Type(type="org.hibernate.type.UUIDCharType")
-    private UUID userRolId;
+    @Column(name ="user_role")
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
     private String address;
 
@@ -34,10 +35,4 @@ public class User {
     private String lastName;
 
     private String hashedPassword;
-
-    @PrePersist
-    public void generateId(){
-        this.id = UUID.randomUUID();
-    }
-
 }

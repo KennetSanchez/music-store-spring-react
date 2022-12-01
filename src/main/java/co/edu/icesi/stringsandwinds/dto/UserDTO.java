@@ -1,5 +1,6 @@
 package co.edu.icesi.stringsandwinds.dto;
 
+import co.edu.icesi.stringsandwinds.constant.Roles;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -18,6 +19,10 @@ public class UserDTO {
 
     @Column(unique = true)
     private String phoneNumber;
+
+    private Roles role;
+
+    private String address;
 
     private String firstName;
 

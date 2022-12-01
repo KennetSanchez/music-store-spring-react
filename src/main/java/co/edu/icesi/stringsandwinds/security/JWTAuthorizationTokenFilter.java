@@ -49,7 +49,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
                 }
             }
             else{
-                //Since this part it's executed before the handler exception, the program crashes, so i decided to establish the response by code.
+                //Since this part it's executed before the handler exception, the program crashes, so I decided to establish the response by code.
 
 //                  throw new UserException(HttpStatus.UNAUTHORIZED, new UserError(UserErrorCode.CODE_401, UserErrorCode.CODE_401.getMessage()));
                 response.setStatus(401);
@@ -57,7 +57,6 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
                 response.getWriter().write(UserErrorCode.CODE_08.getMessage());
                 response.getWriter().flush();
             }
-
 
         } catch ( JwtException e){
             System.out.println("Error verifying jwt token: " + e.getMessage());
