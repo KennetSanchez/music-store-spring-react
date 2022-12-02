@@ -44,7 +44,7 @@ const App = () => {
                 <Navbar isAdmin={isAdmin} handleLogout={handleLogout}/>
                 <Routes>
                     <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]}/>}/>
-                    <Route path={"user/home"} element={<Home/>}/>
+                    <Route path={"user/home"} element={<Home cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
                     <Route path={"admin/users"} element={<Users/>}/>
                     <Route path={"user/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
                     <Route path={"user/orders"} element={<Orders/>}/>

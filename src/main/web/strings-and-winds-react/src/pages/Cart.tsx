@@ -28,11 +28,11 @@ export const Cart = (
                         <CartItem color={"bg-purple-100/25"}>
                             <div className={"flex space-between"}>
                                 <div>Image</div>
-                                <div>Name</div>
+                                <div>{cartItem.name}</div>
                             </div>
                             <div className={"flex-space-between"}>
-                                <div>Quant</div>
-                                <div>Price</div>
+                                <div>{cartItem.quantity}</div>
+                                <div>{cartItem.price}</div>
                             </div>
                         </CartItem>))}
                 </div>
