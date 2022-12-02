@@ -32,8 +32,6 @@ public class UserDTO {
 
     private Role role;
 
-    @NotNull
-    @NotBlank
     private String address;
 
     @NotNull
@@ -50,6 +48,5 @@ public class UserDTO {
     @NotEmpty
     private String password;
 
-    @NotNull
     private UUID userRolId;
 }
