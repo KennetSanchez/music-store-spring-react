@@ -10,6 +10,7 @@ import {Orders} from "./pages/Orders";
 import { SignUp } from './pages/SignUp';
 import { PublishItem } from './pages/PublisItem';
 import { UnknownUrl } from './pages/UnknownUrl';
+import {Footer} from "./components/Footer";
 
 export const UserToken = React.createContext({
     token: "", 
@@ -38,20 +39,21 @@ const App = () => {
     
 
     return (
-      <UserToken.Provider value={state} >
-        <div className={"h-screen"}>
-          <Navbar isAdmin={isAdmin} handleLogout={handleLogout}/>
-          <Routes>
-              <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]}/>}/>
-              <Route path={"user/home"} element={<Home/>}/>
-              <Route path={"admin/users"} element={<Users/>}/>
-              <Route path={"user/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
-              <Route path={"user/orders"} element={<Orders/>}/>
-              <Route path={"user/account"} element={<Account/>}/>
-              <Route path={"/sign-up"} element={<SignUp/>}/>
-              <Route path={"admin/publish-item"} element={<PublishItem/>}/>
-              <Route path={"*"} element={<UnknownUrl/>}/>
-          </Routes>
+        <UserToken.Provider value={state} >
+            <div className={"h-screen"}>
+                <Navbar isAdmin={isAdmin} handleLogout={handleLogout}/>
+                <Routes>
+                    <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]}/>}/>
+                    <Route path={"user/home"} element={<Home/>}/>
+                    <Route path={"admin/users"} element={<Users/>}/>
+                    <Route path={"user/cart"} element={<Cart cartState={[cart, setCart]} itemCountState={[cartItemCount, setCartItemCount]}/>}/>
+                    <Route path={"user/orders"} element={<Orders/>}/>
+                    <Route path={"user/account"} element={<Account/>}/>
+                    <Route path={"/sign-up"} element={<SignUp/>}/>
+                    <Route path={"admin/publish-item"} element={<PublishItem/>}/>
+                    <Route path={"*"} element={<UnknownUrl/>}/>
+                </Routes>
+                <Footer/>
         </div>
       </UserToken.Provider>
   );
