@@ -16,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     private String email;

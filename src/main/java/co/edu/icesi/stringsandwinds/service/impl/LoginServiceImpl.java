@@ -48,6 +48,7 @@ public class LoginServiceImpl implements LoginService {
         if (requestHash.equals(expectedHash)) {
             Map<String, String> claims = new HashMap<>();
             claims.put("userId", user.getId().toString());
+            claims.put("userRole", user.getRole().getName().toString());
             return new TokenDTO(JWTParser.createJWT(user.getId().toString(), user.getFirstName(), user.getLastName(), claims, EXPIRATION_TOKEN_TIME));
         }
         throw new UserException(HttpStatus.ACCEPTED, new UserError(UserErrorCode.CODE_07, UserErrorCode.CODE_07.getMessage()));

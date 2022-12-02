@@ -1,5 +1,6 @@
 package co.edu.icesi.stringsandwinds.model;
 
+import co.edu.icesi.stringsandwinds.constant.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +24,8 @@ public class Role {
     private UUID roleId;
 
     @Column(name = "role_name")
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private Roles name;
 
     private String description;
 

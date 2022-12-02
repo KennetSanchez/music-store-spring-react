@@ -22,7 +22,7 @@ import java.util.UUID;
 public class Order  implements Serializable {
 
     @Id
-    @Type(type = "org.hibernate.type.UUIDCharType")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID orderId;
 
     @Id

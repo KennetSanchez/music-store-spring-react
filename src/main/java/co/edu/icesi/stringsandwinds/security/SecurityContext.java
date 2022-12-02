@@ -15,6 +15,7 @@ public class SecurityContext implements Serializable {
 
     private UUID userId;
     private UUID roleId;
+    private String roleName;
     private UUID organizationId;
     private String token;
 }

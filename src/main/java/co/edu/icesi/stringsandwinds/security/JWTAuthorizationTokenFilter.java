@@ -1,14 +1,21 @@
 package co.edu.icesi.stringsandwinds.security;
 
 
+import co.edu.icesi.stringsandwinds.constant.Roles;
 import co.edu.icesi.stringsandwinds.constant.UserErrorCode;
+import co.edu.icesi.stringsandwinds.model.Role;
+import co.edu.icesi.stringsandwinds.repository.RoleRepository;
+import co.edu.icesi.stringsandwinds.repository.UserRepository;
+import co.edu.icesi.stringsandwinds.service.impl.UserServiceImpl;
 import co.edu.icesi.stringsandwinds.utils.JWTParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import liquibase.repackaged.org.apache.commons.lang3.StringUtils;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.stereotype.Component;
@@ -32,20 +39,21 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String USER_ID_CLAIM_NAME = "userId";
+    private static final String USER_ROLE_CLAIM_NAME = "userRole";
     private static final String[] EXCLUDE_PATHS = {"POST /login", "POST /users", "GET /items"};
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             if(containsToken(request)){
-
-
                 String jwtToken = request.getHeader(AUTHORIZATION_HEADER).replace(TOKEN_PREFIX, StringUtils.EMPTY);
-                Claims claims = JWTParser.decodeJWT(jwtToken); //Obtener data
+
+                Claims claims = JWTParser.decodeJWT(jwtToken);
+
                 SecurityContext context = parseClaims(jwtToken, claims);
                 SecurityContextHolder.setUserContext(context);
 
-                if(getMyUserFilter(request, response)){
+                if(getMyUserFilter(request, response) && canPublishItem(request, response)){
                     filterChain.doFilter(request, response);
                 }
             }
@@ -77,11 +85,14 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         String value = (String)claims.get(key);
         return Optional.ofNullable(value).orElseThrow();
     }
+
     public SecurityContext parseClaims(String jwtToken, Claims claims) {
         String userId = claimKey(claims, USER_ID_CLAIM_NAME);
+        String roleName = claimKey(claims, USER_ROLE_CLAIM_NAME);
         SecurityContext context = new SecurityContext();
         try{
             context.setUserId(UUID.fromString(userId));
+            context.setRoleName(roleName);
             context.setToken(jwtToken);
         }catch (IllegalArgumentException e){
             throw new MalformedJwtException("Error parsing jwt");
@@ -90,12 +101,35 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         return context;
     }
 
+    //Acceder al repositorio
+    @Autowired
+    public RoleRepository roleRepository;
+
+    @SneakyThrows
+    private boolean canPublishItem(HttpServletRequest request, HttpServletResponse response){
+        boolean authorized = true;
+        String method = request.getMethod();
+        String path = request.getRequestURI();
+
+        String roleFounded = SecurityContextHolder.getContext().getRoleName();
+        String neededRole = Roles.ADMIN.toString();
+
+        if (method.equals("POST") && path.startsWith("/items") && !neededRole.equalsIgnoreCase(roleFounded)){
+            response.setStatus(401);
+            response.setHeader(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_VALUE);
+            response.getWriter().write(UserErrorCode.CODE_12.getMessage());
+            response.getWriter().flush();
+            authorized = false;
+        }
+
+        return authorized;
+    }
+
     @SneakyThrows
     private boolean getMyUserFilter(HttpServletRequest request, HttpServletResponse response) {
         boolean authorized = true;
         String method = request.getMethod();
         String path = request.getRequestURI();
-
         //Hashmap o if
 
         if (method.equals("GET") && path.startsWith("/users/") && !path.endsWith(SecurityContextHolder.getContext().getUserId().toString())) {

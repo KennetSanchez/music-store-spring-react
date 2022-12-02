@@ -28,7 +28,6 @@ public class ItemController implements ItemAPI {
 
     @Override
     public ItemDTO createItem(@Valid ItemDTO itemDTO) {
-        System.out.println(itemDTO);
         return itemMapper.fromItem(itemService.createItem(itemMapper.fromDTO(itemDTO)));
     }
 

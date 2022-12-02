@@ -22,11 +22,11 @@ import java.util.UUID;
 public class OrderToItems  implements Serializable {
 
     @Id
-    @Type(type = "org.hibernate.type.UUIDCharType")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID orderId;
 
     @Id
-    @Type(type = "org.hibernate.type.UUIDCharType")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID itemId;
 
     private int quantity;
