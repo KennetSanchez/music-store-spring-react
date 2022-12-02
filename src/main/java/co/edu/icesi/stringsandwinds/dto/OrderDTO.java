@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.UUID;
 
 @Data
@@ -23,6 +24,7 @@ public class OrderDTO {
     @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID costumerId;
 
+    @Min(value = 0)
     private float total;
 
     @Enumerated(EnumType.STRING)
