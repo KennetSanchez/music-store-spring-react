@@ -2,11 +2,17 @@ package co.edu.icesi.stringsandwinds.controller;
 
 import co.edu.icesi.stringsandwinds.api.UserAPI;
 import co.edu.icesi.stringsandwinds.constant.UserErrorCode;
+import co.edu.icesi.stringsandwinds.dto.ItemDTO;
+import co.edu.icesi.stringsandwinds.dto.OrderToItemsDTO;
 import co.edu.icesi.stringsandwinds.dto.UserDTO;
 import co.edu.icesi.stringsandwinds.dto.UserPublicDTO;
 import co.edu.icesi.stringsandwinds.error.exception.UserError;
 import co.edu.icesi.stringsandwinds.error.exception.UserException;
+import co.edu.icesi.stringsandwinds.mapper.ItemMapper;
+import co.edu.icesi.stringsandwinds.mapper.OrderMapper;
 import co.edu.icesi.stringsandwinds.mapper.UserMapper;
+import co.edu.icesi.stringsandwinds.model.Item;
+import co.edu.icesi.stringsandwinds.service.OrderService;
 import co.edu.icesi.stringsandwinds.service.UserService;
 import com.google.common.hash.Hashing;
 import lombok.AllArgsConstructor;
@@ -26,7 +32,17 @@ public class UserController implements UserAPI {
     public final UserService userService;
     public final UserMapper userMapper;
 
+    public final OrderMapper orderMapper;
+    public final OrderService orderService;
+
+    public final ItemMapper itemMapper;
+
     private final UUID DEFAULT_ROLE = UUID.fromString("0e02ed53-f5e2-4f7a-bd86-8aadcadeb4eb");
+
+    @Override
+    public ItemDTO addItemToOrder(OrderToItemsDTO orderToItemsDTO){
+        return itemMapper.fromItem(userService.addItemToOrder(orderToItemsDTO.getItemId(), orderToItemsDTO.getOrderId(), orderToItemsDTO.getQuantity()));
+    }
 
     @Override
     public UserDTO getUser(UUID userId) {

@@ -27,8 +27,7 @@ public class Order  implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID orderId;
-
-    @Id
+    
     @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID costumerId;
 

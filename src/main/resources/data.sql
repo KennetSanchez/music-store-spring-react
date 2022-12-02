@@ -20,8 +20,8 @@ INSERT INTO USER_PERMISSION (permission_id, uri, permission_key, permission_meth
 INSERT INTO ROLE_PERMISSION (role_id, permission_id) VALUES
     ('0e02ed53-f5e2-4f7a-bd86-8aadcadeb4eb', 'ccc7ff73-1989-413a-ab52-9bec7a049e33') ON CONFLICT DO NOTHING;
 
+DELETE FROM ORDER_X_ITEMS WHERE order_id='2e72ed53-f5e2-4f7a-bd86-8aadcadeb4ea';
 DELETE FROM ORDERS WHERE costumer_id='00000000-0000-0000-0000-000000000000';
-
 DELETE FROM USERS WHERE id='00000000-0000-0000-0000-000000000000';
 
 INSERT INTO USERS (id, role_id, email, address, phone_number, first_name, last_name, hashed_password) VALUES

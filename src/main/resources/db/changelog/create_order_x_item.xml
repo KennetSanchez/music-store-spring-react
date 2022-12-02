@@ -5,10 +5,10 @@
     <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750d" author="S_W" failOnError="true">
         <createTable tableName="ORDER_X_ITEMS">
             <column name="order_id" type="UUID">
-                <constraints nullable="false" references="ORDERS(order_id)" foreignKeyName="fk-order-order-id"/>
+                <constraints nullable="false" references="ORDERS(order_id)" foreignKeyName="fk-order-order-id" primaryKey="true" />
             </column>
             <column name="item_id" type="UUID">
-                <constraints nullable="false" references="ITEMS(item_id)" foreignKeyName="fk-order-item-id"/>
+                <constraints nullable="false" references="ITEMS(item_id)" foreignKeyName="fk-order-item-id" primaryKey="true" />
             </column>
             <column name="quantity" type="numeric" />
         </createTable>

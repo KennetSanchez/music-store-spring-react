@@ -3,12 +3,8 @@ package co.edu.icesi.stringsandwinds.service.impl;
 import co.edu.icesi.stringsandwinds.constant.UserErrorCode;
 import co.edu.icesi.stringsandwinds.error.exception.UserError;
 import co.edu.icesi.stringsandwinds.error.exception.UserException;
-import co.edu.icesi.stringsandwinds.model.Permission;
-import co.edu.icesi.stringsandwinds.model.Role;
-import co.edu.icesi.stringsandwinds.model.User;
-import co.edu.icesi.stringsandwinds.repository.PermissionRepository;
-import co.edu.icesi.stringsandwinds.repository.RoleRepository;
-import co.edu.icesi.stringsandwinds.repository.UserRepository;
+import co.edu.icesi.stringsandwinds.model.*;
+import co.edu.icesi.stringsandwinds.repository.*;
 import co.edu.icesi.stringsandwinds.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -31,12 +27,12 @@ import java.util.stream.StreamSupport;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     public final UserRepository userRepository;
+    public final ItemRepository itemRepository;
+    public final OrderRepository orderRepository;
 
     public final RoleRepository roleRepository;
 
     public final PermissionRepository permissionRepository;
-
-
 
     @Override
     public User getUser(UUID userId) {
@@ -55,6 +51,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return userRepository.save(userDTO);
         }
         throw new UserException(HttpStatus.CONFLICT,  new UserError(UserErrorCode.CODE_06, UserErrorCode.CODE_06.getMessage()));
+    }
+
+    @Override
+    public Item addItemToOrder(UUID itemId, UUID orderId, int quantity) {
+        return orderRepository.insertItemIntoOrder(orderId, itemId, quantity);
     }
 
     @Override
