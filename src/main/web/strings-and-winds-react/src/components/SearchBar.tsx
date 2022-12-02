@@ -19,7 +19,7 @@ export const SearchBar = (
 
     return (
         <div className={style}>
-            <div id={"google"} className={"m-0 w-8 h-8 bg-center bg-no-repeat"} style={{backgroundImage: 'url("/icons/search.svg")'}}/>
+            <div id={"search"} className={"m-0 w-8 h-8 bg-center bg-no-repeat"} style={{backgroundImage: 'url("/icons/search.svg")'}}/>
             <div className={"flex flex-col w-full h-full justify-between"}>
                 <input onFocus={toggleUnderline} onBlur={toggleUnderline} type="text" placeholder={props.prompt} onChange={props.handleChange} className={`focus:outline-none w-full h-full bg-transparent placeholder:text-purple-900`}/>
                 <div id={"underlineBar"} className={"h-0.5 w-full"}/>

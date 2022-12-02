@@ -50,7 +50,7 @@ export const Landing = (
     }
 
     return (
-        <div className={"w-full h-full absolute"}>
+        <div className={"w-full h-full"}>
             <GlassCard position={"z-10 absolute inset-x-0 mx-auto mt-24"} padding={"py-12 px-16"} size={"h-[32rem] w-96"} color={"bg-purple-100/25"} spacing={"space-y-24"}>
                 <h3 className={"text-2xl"}>LOGIN</h3>
                 <div className={"h-full flex flex-col items-center justify-between"}>
@@ -59,10 +59,12 @@ export const Landing = (
                 </div>
             </GlassCard>
 
-            <div className={"absolute object-fit h-full w-full bg-gradient-to-l from-black via-fuchsia-900/50 to-transparent opacity-40 bg-top-center"} />
-            <div className={"absolute object-fit h-full w-full bg-black/20 bg-top-center"} />
-            <div className={"w-full h-full bg-no-repeat bg-cover bg-center"}
-                style={{ backgroundImage: 'url(' + bgImage + ')' }} />
+            <div className={"w-full h-full relative"}>
+                <div className={"absolute object-fit h-full w-full bg-gradient-to-l from-black via-fuchsia-900/50 to-transparent opacity-40 bg-top-center"} />
+                <div className={"absolute object-fit h-full w-full bg-black/20 bg-top-center"} />
+                <div className={"w-full h-full bg-no-repeat bg-cover bg-center"}
+                    style={{ backgroundImage: 'url(' + bgImage + ')' }} />
+            </div>
         </div>
     );
 }

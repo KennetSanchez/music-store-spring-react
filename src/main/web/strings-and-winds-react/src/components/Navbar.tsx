@@ -19,7 +19,7 @@ export const Navbar = (
     }
 
     return (
-        <header className={`sticky top-0 z-50 flex flex-row px-16 items-center bg-black text-slate-100 h-16 ${navVariant}`}>
+        <header className={`z-30 flex flex-row px-16 items-center bg-black text-slate-100 h-16 ${navVariant}`}>
             <Logo variant={0}/>
             <div id={"navLinkTree"} className={linkTreeVariant}>
                 <Link className={"nav_link"} to={"user/home"}>Home</Link>

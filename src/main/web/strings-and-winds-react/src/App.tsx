@@ -40,7 +40,7 @@ const App = () => {
 
     return (
         <UserToken.Provider value={state} >
-            <div className={"h-screen"}>
+            <div className={"h-full"}>
                 <Navbar isAdmin={isAdmin} handleLogout={handleLogout}/>
                 <Routes>
                     <Route path={"/"} element={<Landing adminState={[isAdmin, setIsAdmin]}/>}/>
@@ -53,7 +53,6 @@ const App = () => {
                     <Route path={"admin/publish-item"} element={<PublishItem/>}/>
                     <Route path={"*"} element={<UnknownUrl/>}/>
                 </Routes>
-                <Footer/>
         </div>
       </UserToken.Provider>
   );
