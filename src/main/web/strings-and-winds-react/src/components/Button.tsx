@@ -19,13 +19,16 @@ export const Button = (
     const squareSize : string = "h-14 w-14";
     const size : string = "h-10 w-36";
 
-    const givenClass = props.extraClass !=undefined? props.extraClass : ""
+    const givenClass = props.extraClass !== undefined ? props.extraClass : "";
 
     const types = () => {
+        if (givenClass !== "") return givenClass;
         switch (props.type) {
             case "primary":
             default:
                 return `${shadow} ${size} bg-purple-700 text-white text-base ${transition} hover:bg-purple-400 hover:text-purple-800 ${focus} focus:ring-purple-200`;
+            case "primary:deselected":
+                return `${shadow} ${size} bg-purple-300 text-purple-900 text-base ${transition} hover:bg-purple-400 hover:text-purple-800 ${focus} focus:ring-purple-200`;
             case "square":
                 return `${shadow} ${size} bg-purple-800 text-purple-200 ${transition} hover:bg-purple-400 hover:text-purple-800 ${focus} focus:ring-purple-200`;
             case "square-danger":
@@ -35,7 +38,7 @@ export const Button = (
         }
     }
     if (props.isSubmit) return (
-        <input name={props.label.toLowerCase()} type={"submit"} className={`${givenClass} ${props.rounded} ${types()}`} value={props.label}/>
+        <input name={props.label.toLowerCase()} type={"submit"} className={`${props.rounded} ${types()}`} value={props.label}/>
     ); else return (
         <input name={props.label.toLowerCase()} type={"button"} onClick={props.onClick} className={`${givenClass} ${props.rounded} ${types()}`} value={props.label}/>
     );
