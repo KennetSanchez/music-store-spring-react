@@ -25,6 +25,7 @@ public class UserController implements UserAPI {
 
     public final UserService userService;
     public final UserMapper userMapper;
+    private final UUID DEFAULT_ROLE = UUID.fromString("ccc7ff73-1989-413a-ab52-9bec7a049e33");
 
     @Override
     public UserDTO getUser(UUID userId) {
@@ -35,7 +36,7 @@ public class UserController implements UserAPI {
     public UserDTO createUser(@Valid UserDTO userDTO) {
         if(hasAtLeastOneContactWay(userDTO.getEmail(), userDTO.getPhoneNumber())){
             userDTO.setPassword(Hashing.sha256().hashString(userDTO.getPassword(), StandardCharsets.UTF_8).toString());
-            return userMapper.fromUser(userService.createUser(userMapper.fromDTO(userDTO)));
+            return userMapper.fromUser(userService.createUser(userMapper.fromDTO(userDTO), DEFAULT_ROLE));
         }
         throw new UserException(HttpStatus.BAD_REQUEST, new UserError(UserErrorCode.CODE_10, UserErrorCode.CODE_10.getMessage()));
     }

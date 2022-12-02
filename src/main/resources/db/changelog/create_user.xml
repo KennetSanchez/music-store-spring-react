@@ -8,7 +8,9 @@
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
-            <column name="user_role" type="varchar(50)" />
+            <column name="role_id" type="UUID">
+                <constraints nullable="false" references="user_role(role_id)" foreignKeyName="fk-user-role"/>
+            </column>
             <column name="email" type="varchar(255)" />
             <column name="address" type="varchar(255)" />
             <column name="phone_number" type="varchar(255)" />

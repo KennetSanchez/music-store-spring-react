@@ -1,10 +1,9 @@
 package co.edu.icesi.stringsandwinds.dto;
 
-import co.edu.icesi.stringsandwinds.constant.Roles;
+import co.edu.icesi.stringsandwinds.model.Role;
 import lombok.*;
 
 import javax.persistence.Column;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -20,7 +19,7 @@ public class UserDTO {
     @Column(unique = true)
     private String phoneNumber;
 
-    private Roles role;
+    private Role role;
 
     private String address;
 

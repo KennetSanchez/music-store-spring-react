@@ -3,9 +3,12 @@ package co.edu.icesi.stringsandwinds.service.impl;
 import co.edu.icesi.stringsandwinds.constant.UserErrorCode;
 import co.edu.icesi.stringsandwinds.error.exception.UserError;
 import co.edu.icesi.stringsandwinds.error.exception.UserException;
+import co.edu.icesi.stringsandwinds.model.Permission;
+import co.edu.icesi.stringsandwinds.model.Role;
 import co.edu.icesi.stringsandwinds.model.User;
+import co.edu.icesi.stringsandwinds.repository.PermissionRepository;
+import co.edu.icesi.stringsandwinds.repository.RoleRepository;
 import co.edu.icesi.stringsandwinds.repository.UserRepository;
-import co.edu.icesi.stringsandwinds.repository.UserRepositoryJpa;
 import co.edu.icesi.stringsandwinds.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +31,12 @@ import java.util.stream.StreamSupport;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     public final UserRepository userRepository;
-    public final UserRepositoryJpa userRepositoryJpa;
+
+    public final RoleRepository roleRepository;
+
+    public final PermissionRepository permissionRepository;
+
+
 
     @Override
     public User getUser(UUID userId) {
@@ -40,8 +48,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User createUser(User userDTO) {
+    public User createUser(User userDTO, UUID roleId) {
         if(!repeatedPhoneOrEmail(userDTO.getEmail(),userDTO.getPhoneNumber())) {
+            Role role = roleRepository.findById(roleId).orElseThrow();
+            userDTO.setRole(role);
+            List<Permission> permissions = StreamSupport.stream(permissionRepository.findAll().spliterator(),false).collect(Collectors.toList());
             return userRepository.save(userDTO);
         }
         throw new UserException(HttpStatus.CONFLICT,  new UserError(UserErrorCode.CODE_06, UserErrorCode.CODE_06.getMessage()));
@@ -69,7 +80,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User foundedUser = userRepositoryJpa.findByEmail(email);
+        User foundedUser = userRepository.findUserByEmail(email).orElse(null);
 
         if(foundedUser != null){
             System.out.println(foundedUser);

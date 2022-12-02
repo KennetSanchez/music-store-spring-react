@@ -1,6 +1,5 @@
 package co.edu.icesi.stringsandwinds.model;
 
-import co.edu.icesi.stringsandwinds.constant.Roles;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
@@ -22,9 +21,9 @@ public class User {
 
     private String email;
 
-    @Column(name ="user_role")
-    @Enumerated(EnumType.STRING)
-    private Roles role;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     private String address;
 

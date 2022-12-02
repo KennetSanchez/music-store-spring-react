@@ -32,15 +32,16 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String USER_ID_CLAIM_NAME = "userId";
-    private static final String[] EXCLUDE_PATHS = {"POST /login", "POST /users"};
+    private static final String[] EXCLUDE_PATHS = {"POST /login", "POST /users", "GET /items"};
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             if(containsToken(request)){
 
+
                 String jwtToken = request.getHeader(AUTHORIZATION_HEADER).replace(TOKEN_PREFIX, StringUtils.EMPTY);
-                Claims claims = JWTParser.decodeJWT(jwtToken);
+                Claims claims = JWTParser.decodeJWT(jwtToken); //Obtener data
                 SecurityContext context = parseClaims(jwtToken, claims);
                 SecurityContextHolder.setUserContext(context);
 
@@ -71,6 +72,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         return authenticationHeader != null && authenticationHeader.startsWith(TOKEN_PREFIX);
     }
 
+
     private String claimKey(Claims claims, String key) {
         String value = (String)claims.get(key);
         return Optional.ofNullable(value).orElseThrow();
@@ -94,6 +96,8 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         String method = request.getMethod();
         String path = request.getRequestURI();
 
+        //Hashmap o if
+
         if (method.equals("GET") && path.startsWith("/users/") && !path.endsWith(SecurityContextHolder.getContext().getUserId().toString())) {
             response.setStatus(401);
             response.setHeader(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_VALUE);
@@ -104,8 +108,6 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
         return authorized;
     }
-
-
 
 
     @Override

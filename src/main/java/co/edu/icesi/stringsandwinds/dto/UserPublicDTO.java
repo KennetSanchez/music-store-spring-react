@@ -1,13 +1,10 @@
 package co.edu.icesi.stringsandwinds.dto;
 
-import co.edu.icesi.stringsandwinds.constant.Roles;
+import co.edu.icesi.stringsandwinds.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.util.UUID;
 
 @Data
@@ -27,5 +24,5 @@ public class UserPublicDTO {
 
     private String address;
 
-    private Roles role;
+    private Role role;
 }

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Data
-@Table(name = "PERMISSIONS")
+@Table(name = "user_permission")
 @Entity
 @Builder
 @NoArgsConstructor

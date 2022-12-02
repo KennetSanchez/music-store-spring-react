@@ -2,15 +2,17 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
+    <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
+
     <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750d" author="S_W" failOnError="true">
 
-        <createTable tableName="ROLES">
-            <column name="role_id" type="UUID">
+        <createTable tableName="user_permission">
+            <column name="permission_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
-            <column name="role" type="varchar(50)" />
-            <column name="role_description" type="varchar(250)" />
-
+            <column name="uri" type="varchar(255)" />
+            <column name="permission_key" type="varchar(1024)" />
+            <column name="permission_method" type="varchar(255)" />
         </createTable>
     </changeSet>
 </databaseChangeLog>
