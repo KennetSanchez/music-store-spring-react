@@ -15,6 +15,7 @@ export const Home = (
 ) => {
     const [items, setItems] = useState([]);
     const {token, setToken} = useContext(UserToken);
+
     document.getElementById("body")?.setAttribute("class", "overflow-auto")
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +30,7 @@ export const Home = (
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authentication' : 'Bearer ' + token
+                'Authorization' : 'Bearer ' + token
             }
         })
             .then(response => response.json())
@@ -48,9 +49,13 @@ export const Home = (
         }
         else return (
             <div className={"grid grid-cols-3 gap-12"}>
-                {props.cartState[0].map((cartItem: CartItemType) => (
-                    <ItemCard name={cartItem.name} description={cartItem.description} price={cartItem.price}
-                              shippingIncluded={cartItem.shipping}/>))}
+                {items.map((cartItem: CartItemType, index:number) => (
+                    
+                    <ItemCard key={index} name={cartItem.name} description={cartItem.description} price={cartItem.price}
+                              shippingIncluded={cartItem.shipping}/>)) 
+                              
+                              }
+                
             </div>
         );
     }
