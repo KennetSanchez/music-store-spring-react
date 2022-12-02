@@ -9,8 +9,11 @@ import {ToggleButton} from "../components/ToggleButton";
 import {Button} from "../components/Button";
 
 export const PublishItem = () => {
-    const navigate = useNavigate();
+
     document.getElementById("body")?.setAttribute("class", "overflow-hidden")
+
+    const navigate = useNavigate();
+    const inputUrlElement = document.getElementById("urlInputSection") as HTMLInputElement;
 
     const [includesShipping, setIncludesShipping] = useState(true);
 
@@ -21,10 +24,12 @@ export const PublishItem = () => {
         const name = form.iName.value;
         const description = form.iDescription.value;
         const basePrice = form.iPrice.value;
+        const url = inputUrlElement.value;
+
         const shippingPrice = includesShipping ? 0 : basePrice * (0.0125);
 
         if (verifyInputs()) {
-            await createItem(name, includesShipping, description, basePrice, shippingPrice)
+            await createItem(name, includesShipping, description, basePrice, shippingPrice, url)
         }
     }
 
@@ -43,6 +48,11 @@ export const PublishItem = () => {
         return true
     }
 
+    function updateUrlImage(){
+        const url = inputUrlElement.value;
+        setItemImage(url)
+    }
+
     const {token, setToken} = useContext(UserToken);
 
     const createItem = async (
@@ -51,6 +61,7 @@ export const PublishItem = () => {
         givenDescription : string,
         givenBasePrice : number,
         givenShippingPrice : number,
+        givenUrl : string
     ) => {
 
         const payLoad = { 
@@ -59,9 +70,9 @@ export const PublishItem = () => {
             description: givenDescription,
             basePrice: givenBasePrice,
             shippingPrice: givenShippingPrice,
+            imageUrl : givenUrl
         }
-        console.log(payLoad);
-        console.log(token)
+ 
         await fetch("http://localhost:8080/items", {
                 method: 'POST',
                 headers: {
@@ -86,7 +97,15 @@ export const PublishItem = () => {
 
     const handleMouseHover = (e : React.MouseEvent<HTMLInputElement>) => {
         e.preventDefault();
-        setItemImage(itemImage === "/images/no-image-saw.png" ? "/images/no-image-saw_hover.png" : itemImage === "/images/no-image-saw_hover.png" ? "/images/no-image-saw.png" : itemImage);
+        if(itemImage === "/images/no-image-saw.png"){
+            setItemImage("/images/no-image-saw_hover.png");
+        }else{
+            if(itemImage === "/images/no-image-saw_hover.png"){
+                setItemImage("/images/no-image-saw_hover.png");
+            }else{
+                setItemImage(itemImage);
+            }
+        }
         const preview = document.getElementById("preview") as HTMLDivElement;
         preview.style.backgroundImage = `url('${itemImage}')`;
     }
@@ -96,17 +115,22 @@ export const PublishItem = () => {
         const selector = (e.target as HTMLInputElement);
         const preview = document.getElementById("preview") as HTMLDivElement;
 
+        const imageUrl = inputUrlElement.value;;
+        
         while (preview.firstChild) {
             preview.removeChild(preview.firstChild);
         }
 
         const currFile = selector.files![0];
-        if (!currFile) {
+        
+        if (!currFile || imageUrl ==="") {
             setGradientStyle("bg-gradient-to-l from-neutral-900 to-neutral-800/75 bg-center opacity-60");
             setItemImage("/images/no-image-saw.png");
+            alert("This function isn't implemented yet. Please, type a link to the image in the field below");
         } else {
             setGradientStyle("bg-gradient-to-l from-neutral-900/45 to-neutral-800/55 bg-center");
             setItemImage(URL.createObjectURL(currFile));
+            alert("This function isn't implemented yet. Please, type a link to the image in the field below");
         }
     }
 
@@ -127,12 +151,13 @@ export const PublishItem = () => {
 
                 <section className={`relative h-2/3 w-1/2 ${hoverStyle}`}>
                     <div className={`z-30 absolute pointer-events-none h-full w-full rounded-md ${gradientStyle}`}/>
-                    <div className={`absolute h-full w-full rounded-md`}>
+                    <div className={`flex flex-col item-center absolute h-full w-full rounded-md`}>
                         <input onChange={handlePreview} type={"file"} className={`z-20 absolute h-full w-full opacity-0 hover:cursor-pointer`}
                                onMouseEnter={handleMouseHover}
                                onMouseLeave={handleMouseHover}/>
-                        <div id={"preview"} className={`relative h-full w-full bg-no-repeat bg-cover bg-center rounded-md bg-clip-border`}
+                        <div id={"preview"} className={`relative h-full w-full bg-no-repeat bg-cover bg-center rounded-md bg-clip-border p-10`}
                              style={{backgroundImage: `url("${itemImage}")`}}/>
+                        <Input onChangeAditional={updateUrlImage} id="urlInputSection" initialClassName="mt-10 z-40 m-auto" name={"lImageUrl"} placeHolder="URL to the image" type="text" regexPattern="."></Input>
                     </div>
                 </section>
             </div>

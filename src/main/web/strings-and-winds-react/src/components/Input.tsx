@@ -7,7 +7,8 @@ export const Input = (
         name : string,
         id?:string,
         initialClassName?: string,
-        regexPattern:string
+        regexPattern:string,
+        onChangeAditional?:()=>void
     }
 ) => {
 
@@ -16,6 +17,11 @@ export const Input = (
     
     const regexPattern = new RegExp(props.regexPattern)
     const initialClass = props.initialClassName !== undefined ? props.initialClassName : ""
+
+    function onChangeWrapper(event : any){
+        verifyInput(event);
+        props.onChangeAditional
+    }
 
     function verifyInput(event : any){
         const element = event.nativeEvent.srcElement
