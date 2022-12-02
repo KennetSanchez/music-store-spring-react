@@ -30,7 +30,11 @@ export const Input = (
         }
     }
 
-    return (
+    const isArea : boolean = props.type === "textarea";
+
+    if (!isArea) return (
         <input id={props.id} name={props.name} type={props.type} className={`${initialClass} ${primaryStyle} ${primaryStyleStates}`} placeholder={props.placeHolder} autoComplete={"true"} onChange={verifyInput}/>
+    ); else return (
+        <textarea id={props.id} name={props.name} className={`${initialClass} ${primaryStyle} h-32 ${primaryStyleStates}`} placeholder={props.placeHolder} autoComplete={"true"} onChange={verifyInput}/>
     );
 }

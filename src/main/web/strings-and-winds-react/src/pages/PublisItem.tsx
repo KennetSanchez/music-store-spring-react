@@ -1,12 +1,11 @@
-import React, { FormEvent, useState } from "react";
-import { GlassCard } from "../components/GlassCard";
+import React, {FormEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { ItemForm } from "../components/ItemForm";
 import { UserToken } from "../App";
 import { useContext } from"react"
 import {HeroSection} from "../components/HeroSection";
-import {PaymentOptions} from "../components/PaymentOptions";
-import {Button} from "../components/Button";
+import {GlassCard} from "../components/GlassCard";
+import {Input} from "../components/Input";
+import {ToggleButton} from "../components/ToggleButton";
 
 export const PublishItem = () => {
     const navigate = useNavigate();
@@ -81,19 +80,63 @@ export const PublishItem = () => {
             })
     }
 
-    let itemImage = "/images/no-image-saw.png";
-    const gradientStyle : string = "bg-gradient-to-l from-neutral-900 to-neutral-800/75 bg-center";
-    const hoverStyle : string = "hover:bg-[length:120%] hover:cursor-pointer";
+    const [itemImage, setItemImage] = useState("/images/no-image-saw.png");
+    const [gradientStyle, setGradientStyle] = useState("bg-gradient-to-l from-neutral-900 to-neutral-800/75 bg-center opacity-60");
+    const hoverStyle : string = "transition duration-[400ms] ease-in-out hover:scale-105";
+
+    const handleMouseHover = (e : React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setItemImage(itemImage === "/images/no-image-saw.png" ? "/images/no-image-saw_hover.png" : itemImage === "/images/no-image-saw_hover.png" ? "/images/no-image-saw.png" : itemImage);
+        (e.target as HTMLDivElement).style.backgroundImage = `url('${itemImage}')`;
+    }
+
+    const handlePreview = (e: FormEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        const selector = (e.target as HTMLInputElement);
+        const preview = document.getElementById("preview") as HTMLDivElement;
+
+        while (preview.firstChild) {
+            preview.removeChild(preview.firstChild);
+        }
+
+        const currFile = selector.files![0];
+        console.log(currFile);
+        if (!currFile) {
+            console.log("No file");
+            setGradientStyle("bg-gradient-to-l from-neutral-900 to-neutral-800/75 bg-center opacity-60");
+            setItemImage("/images/no-image-saw.png");
+        } else {
+            console.log("Yes file");
+            setGradientStyle("bg-gradient-to-l from-neutral-900/45 to-neutral-800/55 bg-center");
+            setItemImage(URL.createObjectURL(currFile));
+        }
+    }
 
     return (
         <div className={"w-full h-full relative"}>
-            <section className={"absolute w-full h-full px-24 pt-32"}>
-                <div className={"absolute h-2/3 w-1/2"}>
-                    <div className={`absolute h-full w-full rounded-md ${gradientStyle}`}/>
-                    <div className={`relative h-full w-full bg-no-repeat bg-cover bg-center rounded-md bg-clip-border ${hoverStyle}`}
-                         style={{backgroundImage: `url("${itemImage}")`}}/>
-                </div>
-            </section>
+            <div className={"absolute w-full h-full px-24 pt-32 flex flex-row-reverse justify-between"}>
+
+                <GlassCard padding={"p-6"} size={"h-5/6 w-5/12"} color={"bg-neutral-800/25"} spacing={"space-y-8"}>
+                    <h3>FORM</h3>
+                    <form className={"flex flex-col justify-around items-center h-full"}>
+                        <Input type={"text"} placeHolder={"Item name"} name={"iName"} regexPattern={"."}/>
+                        <Input type={"text"} placeHolder={"Price per Unit"} name={"iPrice"} regexPattern={"[^-]"}/>
+                        <Input type={"textarea"} placeHolder={"Description"} name={"iName"} regexPattern={"."}/>
+                        <ToggleButton title={"Includes Shipping"} size={2}/>
+                    </form>
+                </GlassCard>
+
+                <section className={`relative h-2/3 w-1/2 ${hoverStyle}`}>
+                    <div className={`z-30 absolute pointer-events-none h-full w-full rounded-md ${gradientStyle}`}/>
+                    <div className={`absolute h-full w-full rounded-md`}>
+                        <input onChange={handlePreview} type={"file"} className={`z-20 absolute h-full w-full opacity-0 hover:cursor-pointer`}/>
+                        <div id={"preview"} className={`relative h-full w-full bg-no-repeat bg-cover bg-center rounded-md bg-clip-border`}
+                             style={{backgroundImage: `url("${itemImage}")`}}
+                        onMouseEnter={handleMouseHover}
+                        onMouseLeave={handleMouseHover}/>
+                    </div>
+                </section>
+            </div>
             <HeroSection/>
         </div>
     );
