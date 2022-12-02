@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if(!repeatedPhoneOrEmail(userDTO.getEmail(),userDTO.getPhoneNumber())) {
             Role role = roleRepository.findById(roleId).orElseThrow();
             userDTO.setRole(role);
-            List<Permission> permissions = StreamSupport.stream(permissionRepository.findAll().spliterator(),false).collect(Collectors.toList());
             return userRepository.save(userDTO);
         }
         throw new UserException(HttpStatus.CONFLICT,  new UserError(UserErrorCode.CODE_06, UserErrorCode.CODE_06.getMessage()));

@@ -22,6 +22,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type="org.hibernate.type.PostgresUUIDType")
+    @Column(name = "item_id")
     private UUID itemId;
 
     @NotEmpty

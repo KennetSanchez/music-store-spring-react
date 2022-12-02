@@ -25,6 +25,7 @@ public class UserController implements UserAPI {
 
     public final UserService userService;
     public final UserMapper userMapper;
+
     private final UUID DEFAULT_ROLE = UUID.fromString("0e02ed53-f5e2-4f7a-bd86-8aadcadeb4eb");
 
     @Override

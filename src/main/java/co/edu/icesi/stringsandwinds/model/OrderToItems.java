@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Data
-@Table(name = "ORDERS_TO_ITEMS")
+@Table(name = "ORDERS_X_ITEMS")
 @Entity
 @Builder
 @NoArgsConstructor

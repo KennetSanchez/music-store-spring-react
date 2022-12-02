@@ -3,17 +3,14 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750d" author="S_W" failOnError="true">
-
-        <createTable tableName="ORDERS">
+        <createTable tableName="ORDER_X_ITEMS">
             <column name="order_id" type="UUID">
-                <constraints nullable="false" primaryKey="true" />
+                <constraints nullable="false" references="ORDERS(order_id)" foreignKeyName="fk-order-order-id"/>
             </column>
-            <column name="costumer_id" type="UUID">
-                <constraints nullable="false" references="USERS(id)" foreignKeyName="fk-user-id"/>
+            <column name="item_id" type="UUID">
+                <constraints nullable="false" references="ITEMS(item_id)" foreignKeyName="fk-order-item-id"/>
             </column>
-            <column name="total" type="numeric" />
-            <column name="status" type="varchar(50)" />
-
+            <column name="quantity" type="numeric" />
         </createTable>
     </changeSet>
 </databaseChangeLog>
