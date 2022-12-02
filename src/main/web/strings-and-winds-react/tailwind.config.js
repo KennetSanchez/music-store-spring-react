@@ -10,7 +10,10 @@ module.exports = {
     },
     extend: {
       dropShadow: {
-        'purple-glow': '0px 0px 4px #A855F7'
+        'purple-glow': '0px 0px 4px #A855F7',
+      },
+      boxShadow : {
+        'purple-outline': 'inset 0px 0px 8px 3px #A855F7'
       }
     },
   },
